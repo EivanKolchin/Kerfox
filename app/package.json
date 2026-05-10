@@ -1,0 +1,21 @@
+{
+  "name": "physics-exam-bank",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "extract": "node scripts/extract.cjs"
+  },
+  "dependencies": {
+    "katex": "^0.16.9",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "zustand": "^5.0.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "node-html-parser": "^6.1.13",
+    "vite": "^6.3.5"
+  }
+}

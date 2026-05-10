@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell($lines = Get-Content \".\\data\\source-html\\PHYS1204_ExamBank_Interactive.html\"; $idx = ($lines | Select-String 'id=\"toolbar\"').LineNumber; $lines[($idx-5)..($idx+8)] -join \"`n\")"
+    ]
+  }
+}
