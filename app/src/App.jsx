@@ -8,6 +8,7 @@ import FormulaPanel from './components/FormulaPanel.jsx';
 import ExamModal from './components/ExamModal.jsx';
 import ResultsModal from './components/ResultsModal.jsx';
 import LoginPage from './components/LoginPage.jsx';
+import GuidesPage from './components/GuidesPage.jsx';
 
 const LEARNING_LEVELS = [
   {
@@ -276,7 +277,7 @@ function CourseCard({ course, levelId, selectedBoard, onBoardChange, onSelect })
   );
 }
 
-function LandingHub({ onSelectLevel, onLogin }) {
+function LandingHub({ onSelectLevel, onLogin, onOpenGuides }) {
   return (
     <div className="landing-shell">
       <div className="landing-orb landing-orb-one" />
@@ -286,6 +287,10 @@ function LandingHub({ onSelectLevel, onLogin }) {
       <LandingTopBar onLogin={onLogin} />
 
       <nav className="landing-quick-nav" aria-label="Page pointers">
+        <button className="quick-nav-btn" onClick={() => onOpenGuides('learning')}>Optimising your learning</button>
+        <button className="quick-nav-btn" onClick={() => onOpenGuides('health')}>Taking care of your health</button>
+        <button className="quick-nav-btn" onClick={() => onOpenGuides('exam')}>Exam preparation guides</button>
+        <span className="quick-nav-sep" />
         <a href="#our-mission">Our mission</a>
         <a href="#contribute">How to contribute</a>
         <a href="#roadmap">What is next</a>
@@ -433,6 +438,7 @@ export default function App() {
   const [selectedLevelId, setSelectedLevelId] = useState(null);
   const [selectedCourseId, setSelectedCourseId] = useState(null);
   const [selectedBoards, setSelectedBoards] = useState({});
+  const [guidesSection, setGuidesSection] = useState(null);
   const expandAll    = useStore(s => s.expandAll);
   const setModule    = useStore(s => s.setModule);
   const formulaOpen  = useStore(s => s.formulaOpen);
@@ -455,7 +461,13 @@ export default function App() {
     resetPhysicsUi();
     setSelectedCourseId(null);
     setSelectedLevelId(null);
+    setGuidesSection(null);
     setPage('learn');
+  }
+
+  function openGuides(section) {
+    setGuidesSection(section || 'all');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   function goBackToCourses() {
@@ -503,12 +515,16 @@ export default function App() {
     return () => document.removeEventListener('keydown', onKey);
   }, [expandAll, isLivePhysics]);
 
+  if (guidesSection) {
+    return <GuidesPage section={guidesSection} onBack={goHome} />;
+  }
+
   if (page === 'login') {
     return <LoginPage onBack={goHome} />;
   }
 
   if (!selectedLevel) {
-    return <LandingHub onSelectLevel={selectLevel} onLogin={openLogin} />;
+    return <LandingHub onSelectLevel={selectLevel} onLogin={openLogin} onOpenGuides={openGuides} />;
   }
 
   if (selectedCourse && !isLivePhysics) {
