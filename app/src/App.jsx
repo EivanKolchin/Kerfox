@@ -101,30 +101,296 @@ const COURSE_OPTIONS = {
     { id: 'alevel-epq', label: 'Extended Project Qualification (EPQ)', description: 'Independent research and project delivery.', icon: '▤', boards: ['AQA', 'Pearson Edexcel', 'OCR', 'WJEC Eduqas'] },
   ],
   uni: [
-    { id: 'uni-physics', label: 'Physics', description: 'Core physical theory, mechanics, and quanta. Features live PHYS1204 module.', icon: '⚛️', implemented: true, module: 'lasers' },
-    { id: 'uni-maths', label: 'Mathematics', description: 'Analysis, algebra, modelling and methods.', icon: '∫' },
-    { id: 'uni-compsci', label: 'Computer Science', description: 'Algorithms, software engineering and computation.', icon: '⌘' },
-    { id: 'uni-engineering', label: 'Engineering', description: 'Mechanical, civil, aeronautical and electrical foundations.', icon: '⛭' },
-    { id: 'uni-medicine', label: 'Medicine', description: 'Human biology, systems and clinical foundations.', icon: '⚕' },
-    { id: 'uni-biology', label: 'Biological Sciences', description: 'Molecular life sciences, genetics and organisms.', icon: '🧫' },
-    { id: 'uni-chemistry', label: 'Chemistry', description: 'Molecular structure, reaction pathways and lab practice.', icon: '⚗️' },
-    { id: 'uni-economics', label: 'Economics', description: 'Microeconomics, macroeconomics and quantitative tools.', icon: '📈' },
-    { id: 'uni-law', label: 'Law', description: 'Public law, tort, contract and legal reasoning.', icon: '⚖' },
-    { id: 'uni-philosophy', label: 'Philosophy', description: 'Logic, ethics and modern philosophical problems.', icon: 'Φ' },
-    { id: 'uni-psychology', label: 'Psychology', description: 'Cognition, behaviour and research methods.', icon: '◌' },
-    { id: 'uni-history', label: 'History', description: 'Primary-source analysis across historical periods.', icon: '⌛' },
-    { id: 'uni-literature', label: 'Literature', description: 'Close reading, criticism and historical context.', icon: '📚' },
-    { id: 'uni-politics', label: 'Politics & International Relations', description: 'Political theory, institutions and global affairs.', icon: '⌬' },
-    { id: 'uni-geography', label: 'Geography & Earth Sciences', description: 'Physical and human geography methods, Earth systems.', icon: '⛰' },
-    { id: 'uni-accounting', label: 'Accounting & Finance', description: 'Financial reporting, management accounting and corporate finance.', icon: '🧮' },
-    { id: 'uni-sociology', label: 'Sociology & Criminology', description: 'Social behavior, institutions and criminal justice systems.', icon: '🤝' },
-    { id: 'uni-nursing', label: 'Nursing & Midwifery', description: 'Clinical practice, patient care and healthcare sciences.', icon: '🩺' },
-    { id: 'uni-oceanography', label: 'Oceanography & Marine Biology', description: 'Marine ecosystems, ocean dynamics and climate.', icon: '🌊' },
-    { id: 'uni-music', label: 'Music', description: 'Performance, composition and musicology.', icon: '🎵' },
-    { id: 'uni-education', label: 'Education', description: 'Pedagogy, learning theory and educational psychology.', icon: '🎓' },
-    { id: 'uni-languages', label: 'Modern Languages & Linguistics', description: 'Language structure, translation and cultural studies.', icon: '🗣️' },
-    { id: 'uni-archaeology', label: 'Archaeology & Anthropology', description: 'Human origins, ancient societies and material culture.', icon: '🏺' },
-    { id: 'uni-fineart', label: 'Fine Art & Design', description: 'Visual arts, studio practice and art history.', icon: '🎨' },
+    {
+      id: 'uni-physics', label: 'Physics', icon: '⚛️',
+      description: 'Core physical theory — mechanics, electromagnetism, thermodynamics, waves, optics, and quantum physics.',
+      modules: [
+        { id: 'soton-phys1204', label: 'Lasers & Quanta (PHYS1204)', provider: 'University of Southampton', description: 'Laser physics, quantum mechanics, and atomic theory with exam question bank.', implemented: true, module: 'lasers' },
+        { id: 'soton-maths-methods', label: 'Maths Methods 1b', provider: 'University of Southampton', description: 'Vector calculus, differential equations, and linear algebra for physics.' },
+        { id: 'soton-waves', label: 'Waves', provider: 'University of Southampton', description: 'Wave phenomena, optics, acoustics, and electromagnetic waves.' },
+        { id: 'soton-energy-matter', label: 'Energy & Matter', provider: 'University of Southampton', description: 'Thermal physics, thermodynamics, and the kinetic theory of matter.' },
+        { id: 'ucl-mech-relativity', label: 'Mechanics, Relativity & Astrophysics', provider: 'UCL', description: 'Newtonian mechanics, special relativity, and introductory astrophysics.' },
+        { id: 'ucl-thermal-waves', label: 'Thermal Physics & Waves', provider: 'UCL', description: 'Thermodynamics, kinetic theory, wave motion and optics.' },
+        { id: 'ucl-electromag', label: 'Electromagnetism & Optics', provider: 'UCL', description: 'Electrostatics, magnetostatics, Maxwell\'s equations and geometrical optics.' },
+        { id: 'ucl-maths-physics', label: 'Mathematical Methods for Physics', provider: 'UCL', description: 'Vector spaces, Fourier analysis, PDEs and complex analysis.' },
+        { id: 'imperial-mechanics', label: 'Mechanics', provider: 'Imperial College London', description: 'Particle mechanics, rigid bodies, oscillations and Lagrangian methods.' },
+        { id: 'imperial-electromag', label: 'Electromagnetism', provider: 'Imperial College London', description: 'Electrostatics, magnetic fields, Maxwell\'s equations and EM waves.' },
+        { id: 'imperial-thermo', label: 'Thermodynamics', provider: 'Imperial College London', description: 'Laws of thermodynamics, entropy, heat transfer and statistical mechanics.' },
+        { id: 'imperial-maths', label: 'Mathematics for Physicists', provider: 'Imperial College London', description: 'Calculus, linear algebra, ODEs, PDEs and numerical methods.' },
+        { id: 'oxford-physics-1', label: 'Physics I: Mechanics & Special Relativity', provider: 'University of Oxford', description: 'Newtonian mechanics, oscillations, waves and special relativity.' },
+        { id: 'oxford-physics-2', label: 'Physics II: Electromagnetism & Thermal', provider: 'University of Oxford', description: 'Electromagnetism, circuits, thermodynamics and kinetic theory.' },
+        { id: 'oxford-maths', label: 'Mathematical Methods', provider: 'University of Oxford', description: 'Calculus, vectors, matrices, ODEs and Fourier analysis.' },
+        { id: 'cambridge-phys-a', label: 'Physics A', provider: 'University of Cambridge', description: 'Mechanics, special relativity, waves, optics and thermal physics.' },
+        { id: 'cambridge-phys-b', label: 'Physics B', provider: 'University of Cambridge', description: 'Electromagnetism, quantum physics, atomic and nuclear physics.' },
+        { id: 'edinburgh-phys-1a', label: 'Physics 1A: Foundations', provider: 'University of Edinburgh', description: 'Mechanics, waves, thermodynamics and introductory quantum theory.' },
+        { id: 'edinburgh-phys-1b', label: 'Physics 1B: The Material Universe', provider: 'University of Edinburgh', description: 'Electromagnetism, optics, astrophysics and condensed matter.' },
+      ],
+    },
+    {
+      id: 'uni-maths', label: 'Mathematics', icon: '∫',
+      description: 'Pure and applied mathematics — algebra, analysis, geometry, statistics, and modelling.',
+      modules: [
+        { id: 'soton-math1054', label: 'Maths Methods 1b', provider: 'University of Southampton', description: 'Vector calculus, differential equations and linear algebra.' },
+        { id: 'ucl-math-methods1', label: 'Mathematical Methods 1', provider: 'UCL', description: 'Calculus, linear algebra, sequences and series.' },
+        { id: 'ucl-math-methods2', label: 'Mathematical Methods 2', provider: 'UCL', description: 'Multivariable calculus, ODEs, PDEs and vector analysis.' },
+        { id: 'imperial-math1', label: 'Mathematics 1', provider: 'Imperial College London', description: 'Analysis, linear algebra, groups and vector calculus.' },
+        { id: 'imperial-math2', label: 'Mathematics 2', provider: 'Imperial College London', description: 'Complex analysis, probability, statistics and numerical methods.' },
+        { id: 'oxford-analysis', label: 'Analysis I', provider: 'University of Oxford', description: 'Real analysis, sequences, series, continuity and differentiation.' },
+        { id: 'oxford-algebra', label: 'Linear Algebra & Groups', provider: 'University of Oxford', description: 'Vector spaces, matrices, linear transformations and group theory.' },
+        { id: 'cambridge-math-ia', label: 'Mathematics IA', provider: 'University of Cambridge', description: 'Analysis, linear algebra, probability and vector calculus.' },
+        { id: 'cambridge-math-ib', label: 'Mathematics IB', provider: 'University of Cambridge', description: 'Complex analysis, methods, statistics and numerical analysis.' },
+        { id: 'edinburgh-math1', label: 'Mathematics for Physics 1', provider: 'University of Edinburgh', description: 'Calculus, linear algebra and differential equations.' },
+      ],
+    },
+    {
+      id: 'uni-compsci', label: 'Computer Science', icon: '⌘',
+      description: 'Algorithms, programming, systems, artificial intelligence and software engineering.',
+      modules: [
+        { id: 'soton-cs-prog1', label: 'Programming I', provider: 'University of Southampton', description: 'Java fundamentals, OOP, data structures and algorithms.' },
+        { id: 'soton-cs-prog2', label: 'Programming II', provider: 'University of Southampton', description: 'Advanced OOP, concurrency, GUIs and software design.' },
+        { id: 'ucl-cs-prog', label: 'Introduction to Programming', provider: 'UCL', description: 'Python, computational thinking and problem solving.' },
+        { id: 'ucl-cs-algo', label: 'Algorithms & Data Structures', provider: 'UCL', description: 'Sorting, search, graphs, trees and complexity analysis.' },
+        { id: 'imperial-cs1', label: 'Computing 1', provider: 'Imperial College London', description: 'Haskell, Python, functional programming and logic.' },
+        { id: 'imperial-cs2', label: 'Computing 2', provider: 'Imperial College London', description: 'Java, OOP, data structures and software engineering.' },
+        { id: 'oxford-cs-prog', label: 'Introduction to Programming', provider: 'University of Oxford', description: 'Functional programming, Haskell and algorithmic thinking.' },
+        { id: 'oxford-cs-systems', label: 'Computer Systems', provider: 'University of Oxford', description: 'Digital logic, architecture, operating systems and concurrency.' },
+        { id: 'cambridge-cs-ia', label: 'Computer Science IA', provider: 'University of Cambridge', description: 'Programming, algorithms, architecture and graphics.' },
+        { id: 'cambridge-cs-ib', label: 'Computer Science IB', provider: 'University of Cambridge', description: 'AI, compilers, networks, and theory of computation.' },
+        { id: 'edinburgh-inf1', label: 'Informatics 1', provider: 'University of Edinburgh', description: 'Computation and logic, data and analysis.' },
+        { id: 'edinburgh-inf2', label: 'Informatics 2', provider: 'University of Edinburgh', description: 'Algorithms, data structures and software engineering.' },
+      ],
+    },
+    {
+      id: 'uni-engineering', label: 'Engineering', icon: '⛭',
+      description: 'Mechanical, civil, electrical, aeronautical and general engineering foundations.',
+      modules: [
+        { id: 'soton-eng-mech', label: 'Engineering Mechanics', provider: 'University of Southampton', description: 'Statics, dynamics, stress analysis and materials.' },
+        { id: 'soton-eng-thermo', label: 'Thermodynamics & Fluid Mechanics', provider: 'University of Southampton', description: 'Energy, entropy, fluid statics and dynamics.' },
+        { id: 'imperial-eng-mech', label: 'Mechanics & Structures', provider: 'Imperial College London', description: 'Solid mechanics, structural analysis and materials.' },
+        { id: 'imperial-eng-thermo', label: 'Thermodynamics', provider: 'Imperial College London', description: 'Energy systems, heat transfer and fluid mechanics.' },
+        { id: 'ucl-eng-mech', label: 'Engineering Mechanics', provider: 'UCL', description: 'Statics, dynamics and strength of materials.' },
+        { id: 'ucl-eng-maths', label: 'Engineering Mathematics', provider: 'UCL', description: 'Calculus, linear algebra and differential equations for engineers.' },
+        { id: 'oxford-eng-science', label: 'Engineering Science', provider: 'University of Oxford', description: 'Integrated mechanics, thermodynamics, electronics and maths.' },
+        { id: 'cambridge-eng-ia', label: 'Engineering IA', provider: 'University of Cambridge', description: 'Mechanics, materials, thermofluids and electrical engineering.' },
+        { id: 'cambridge-eng-ib', label: 'Engineering IB', provider: 'University of Cambridge', description: 'Structural mechanics, fluid mechanics, control and electronics.' },
+        { id: 'edinburgh-eng-1', label: 'Engineering 1', provider: 'University of Edinburgh', description: 'Mechanics, electronics, design and engineering skills.' },
+      ],
+    },
+    {
+      id: 'uni-medicine', label: 'Medicine', icon: '⚕',
+      description: 'Pre-clinical and clinical foundations — anatomy, physiology, pharmacology and pathology.',
+      modules: [
+        { id: 'soton-med-1', label: 'Foundations of Medicine', provider: 'University of Southampton', description: 'Anatomy, physiology, biochemistry and clinical skills.' },
+        { id: 'ucl-med-1', label: 'Medical Sciences 1', provider: 'UCL', description: 'Cell biology, genetics, anatomy and physiology.' },
+        { id: 'imperial-med-1', label: 'Integrated Medicine 1', provider: 'Imperial College London', description: 'Body systems, molecular medicine and clinical practice.' },
+        { id: 'oxford-med-1', label: 'Pre-Clinical Medicine', provider: 'University of Oxford', description: 'BM BCh year 1: anatomy, physiology, biochemistry and pathology.' },
+        { id: 'cambridge-med-1', label: 'Medical Sciences Tripos', provider: 'University of Cambridge', description: 'Biochemistry, physiology, anatomy and pharmacology.' },
+        { id: 'edinburgh-med-1', label: 'Medicine 1', provider: 'University of Edinburgh', description: 'Foundations of clinical practice and biomedical sciences.' },
+      ],
+    },
+    {
+      id: 'uni-biology', label: 'Biological Sciences', icon: '🧫',
+      description: 'Molecular biology, genetics, ecology, evolution and organismal biology.',
+      modules: [
+        { id: 'soton-bio-1', label: 'Biological Sciences 1', provider: 'University of Southampton', description: 'Cell biology, genetics, evolution and ecology.' },
+        { id: 'ucl-bio-1', label: 'Biology 1', provider: 'UCL', description: 'Molecular biology, cell biology and genetics.' },
+        { id: 'imperial-bio-1', label: 'Biological Sciences 1', provider: 'Imperial College London', description: 'Biochemistry, genetics, microbiology and cell biology.' },
+        { id: 'oxford-bio-1', label: 'Biology 1', provider: 'University of Oxford', description: 'Cell biology, genetics, evolution and animal diversity.' },
+        { id: 'cambridge-bio-nst', label: 'Natural Sciences: Biology', provider: 'University of Cambridge', description: 'Cell biology, developmental biology and physiology.' },
+        { id: 'edinburgh-bio-1', label: 'Biology 1', provider: 'University of Edinburgh', description: 'Genes, cells, organisms and evolution.' },
+      ],
+    },
+    {
+      id: 'uni-chemistry', label: 'Chemistry', icon: '⚗️',
+      description: 'Molecular science — organic, inorganic, physical, analytical and computational chemistry.',
+      modules: [
+        { id: 'soton-chem-1', label: 'Chemistry 1', provider: 'University of Southampton', description: 'Organic, inorganic and physical chemistry foundations.' },
+        { id: 'ucl-chem-1', label: 'Chemistry 1', provider: 'UCL', description: 'Bonding, structure, reactivity and spectroscopy.' },
+        { id: 'imperial-chem-1', label: 'Chemistry 1', provider: 'Imperial College London', description: 'Atomic structure, kinetics, thermodynamics and organic chemistry.' },
+        { id: 'oxford-chem-1', label: 'Chemistry 1', provider: 'University of Oxford', description: 'Inorganic, organic, physical and theoretical chemistry.' },
+        { id: 'cambridge-chem-nst', label: 'Natural Sciences: Chemistry', provider: 'University of Cambridge', description: 'Quantum mechanics, spectroscopy, organic and inorganic chemistry.' },
+        { id: 'edinburgh-chem-1', label: 'Chemistry 1', provider: 'University of Edinburgh', description: 'Organic, inorganic and physical chemistry with lab work.' },
+      ],
+    },
+    {
+      id: 'uni-economics', label: 'Economics', icon: '📈',
+      description: 'Microeconomics, macroeconomics, econometrics and quantitative methods.',
+      modules: [
+        { id: 'soton-econ-1', label: 'Economics 1', provider: 'University of Southampton', description: 'Microeconomics, macroeconomics and quantitative methods.' },
+        { id: 'ucl-econ-1', label: 'Economics 1', provider: 'UCL', description: 'Microeconomics, macroeconomics and mathematical economics.' },
+        { id: 'oxford-econ-ppe', label: 'Economics (PPE Year 1)', provider: 'University of Oxford', description: 'Microeconomics, macroeconomics and economic history.' },
+        { id: 'cambridge-econ-1', label: 'Economics 1', provider: 'University of Cambridge', description: 'Microeconomics, macroeconomics and quantitative methods.' },
+        { id: 'edinburgh-econ-1', label: 'Economics 1', provider: 'University of Edinburgh', description: 'Markets, economic principles and data analysis.' },
+        { id: 'imperial-econ-data', label: 'Economics for Data Science', provider: 'Imperial College London', description: 'Quantitative economics, statistics and machine learning for economics.' },
+      ],
+    },
+    {
+      id: 'uni-law', label: 'Law', icon: '⚖',
+      description: 'Legal systems, contract, tort, public law, criminal law and legal reasoning.',
+      modules: [
+        { id: 'soton-law-1', label: 'Law 1', provider: 'University of Southampton', description: 'Public law, contract, tort and legal skills.' },
+        { id: 'ucl-law-1', label: 'Law 1', provider: 'UCL', description: 'Constitutional law, contract, tort and criminal law.' },
+        { id: 'oxford-law-1', label: 'Jurisprudence & Law 1', provider: 'University of Oxford', description: 'Constitutional law, contract, tort, criminal law and jurisprudence.' },
+        { id: 'cambridge-law-1', label: 'Law 1', provider: 'University of Cambridge', description: 'Constitutional law, contract, tort and criminal law.' },
+        { id: 'edinburgh-law-1', label: 'Law 1', provider: 'University of Edinburgh', description: 'Scottish legal system, public law, contract and delict.' },
+        { id: 'imperial-law-1', label: 'Law Foundations', provider: 'Imperial College London', description: 'Legal reasoning, regulation and ethics in science and technology.' },
+      ],
+    },
+    {
+      id: 'uni-philosophy', label: 'Philosophy', icon: 'Φ',
+      description: 'Logic, ethics, metaphysics, epistemology and the history of philosophy.',
+      modules: [
+        { id: 'soton-phil-1', label: 'Philosophy 1', provider: 'University of Southampton', description: 'Logic, ethics, metaphysics and philosophical reasoning.' },
+        { id: 'ucl-phil-1', label: 'Philosophy 1', provider: 'UCL', description: 'Ethics, epistemology, logic and history of philosophy.' },
+        { id: 'oxford-phil-ppe', label: 'Philosophy (PPE Year 1)', provider: 'University of Oxford', description: 'Logic, moral philosophy and metaphysics.' },
+        { id: 'cambridge-phil-1', label: 'Philosophy 1', provider: 'University of Cambridge', description: 'Ethics, metaphysics, logic and history of analytic philosophy.' },
+        { id: 'edinburgh-phil-1', label: 'Philosophy 1', provider: 'University of Edinburgh', description: 'Mind, knowledge, ethics and philosophical skills.' },
+      ],
+    },
+    {
+      id: 'uni-psychology', label: 'Psychology', icon: '◌',
+      description: 'Cognition, behaviour, neuroscience, development and social psychology.',
+      modules: [
+        { id: 'soton-psych-1', label: 'Psychology 1', provider: 'University of Southampton', description: 'Cognitive, social, developmental and biological psychology.' },
+        { id: 'ucl-psych-1', label: 'Psychology 1', provider: 'UCL', description: 'Brain and behaviour, cognition, social and developmental psychology.' },
+        { id: 'oxford-psych-1', label: 'Experimental Psychology 1', provider: 'University of Oxford', description: 'Cognitive neuroscience, perception, learning and social psychology.' },
+        { id: 'cambridge-psych-nst', label: 'Natural Sciences: Psychology', provider: 'University of Cambridge', description: 'Behavioural neuroscience, cognition and developmental psychology.' },
+        { id: 'edinburgh-psych-1', label: 'Psychology 1', provider: 'University of Edinburgh', description: 'Introduction to psychology: methods, theories and applications.' },
+        { id: 'imperial-psych-1', label: 'Psychology & Behaviour', provider: 'Imperial College London', description: 'Cognitive science, behavioural neuroscience and research methods.' },
+      ],
+    },
+    {
+      id: 'uni-history', label: 'History', icon: '⌛',
+      description: 'Historical analysis across periods and geographies — primary sources, interpretation and argument.',
+      modules: [
+        { id: 'soton-hist-1', label: 'History 1', provider: 'University of Southampton', description: 'Early modern, modern European and global history.' },
+        { id: 'ucl-hist-1', label: 'History 1', provider: 'UCL', description: 'Medieval, early modern and modern British and European history.' },
+        { id: 'oxford-hist-1', label: 'History 1', provider: 'University of Oxford', description: 'British, European and world history with source analysis.' },
+        { id: 'cambridge-hist-1', label: 'History 1', provider: 'University of Cambridge', description: 'British political, economic and social history.' },
+        { id: 'edinburgh-hist-1', label: 'History 1', provider: 'University of Edinburgh', description: 'Scottish, British and global history from early modern to modern.' },
+      ],
+    },
+    {
+      id: 'uni-literature', label: 'Literature', icon: '📚',
+      description: 'English literature, literary theory, critical analysis and creative writing.',
+      modules: [
+        { id: 'soton-engl-1', label: 'English 1', provider: 'University of Southampton', description: 'Poetry, prose, drama and critical theory.' },
+        { id: 'ucl-engl-1', label: 'English 1', provider: 'UCL', description: 'Medieval to modern literature and critical approaches.' },
+        { id: 'oxford-engl-1', label: 'English Language & Literature 1', provider: 'University of Oxford', description: 'Early medieval to Victorian literature and practical criticism.' },
+        { id: 'cambridge-engl-1', label: 'English 1', provider: 'University of Cambridge', description: 'Renaissance to modern literature and critical analysis.' },
+        { id: 'edinburgh-engl-1', label: 'English Literature 1', provider: 'University of Edinburgh', description: 'Reading literature: genres, periods and critical methods.' },
+      ],
+    },
+    {
+      id: 'uni-politics', label: 'Politics & IR', icon: '⌬',
+      description: 'Political theory, comparative politics, international relations and public policy.',
+      modules: [
+        { id: 'soton-politics-1', label: 'Politics 1', provider: 'University of Southampton', description: 'Political theory, comparative politics and global governance.' },
+        { id: 'ucl-politics-1', label: 'Politics 1', provider: 'UCL', description: 'Political theory, comparative politics and international relations.' },
+        { id: 'oxford-politics-ppe', label: 'Politics (PPE Year 1)', provider: 'University of Oxford', description: 'Political theory, comparative government and international relations.' },
+        { id: 'edinburgh-politics-1', label: 'Politics 1', provider: 'University of Edinburgh', description: 'Political ideas, institutions and global politics.' },
+      ],
+    },
+    {
+      id: 'uni-geography', label: 'Geography', icon: '⛰',
+      description: 'Human and physical geography — climate, landscapes, urban systems and global development.',
+      modules: [
+        { id: 'soton-geog-1', label: 'Geography 1', provider: 'University of Southampton', description: 'Human geography, physical geography and GIS.' },
+        { id: 'ucl-geog-1', label: 'Geography 1', provider: 'UCL', description: 'Globalisation, environmental change and geographical methods.' },
+        { id: 'oxford-geog-1', label: 'Geography 1', provider: 'University of Oxford', description: 'Earth systems, human geography and geographical techniques.' },
+        { id: 'cambridge-geog-1', label: 'Geography 1', provider: 'University of Cambridge', description: 'People, environment and spatial analysis.' },
+        { id: 'edinburgh-geog-1', label: 'Geography 1', provider: 'University of Edinburgh', description: 'Environment, society and spatial data science.' },
+      ],
+    },
+    {
+      id: 'uni-accounting', label: 'Accounting & Finance', icon: '🧮',
+      description: 'Financial accounting, management accounting, corporate finance and quantitative methods.',
+      modules: [
+        { id: 'soton-acc-1', label: 'Accounting 1', provider: 'University of Southampton', description: 'Financial accounting, management accounting and quantitative methods.' },
+        { id: 'ucl-acc-1', label: 'Accounting & Finance 1', provider: 'UCL', description: 'Financial reporting, valuation and quantitative finance.' },
+        { id: 'edinburgh-acc-1', label: 'Accountancy 1', provider: 'University of Edinburgh', description: 'Financial accounting, management accounting and business law.' },
+        { id: 'imperial-fin-1', label: 'Finance 1', provider: 'Imperial College London', description: 'Corporate finance, investments and financial econometrics.' },
+      ],
+    },
+    {
+      id: 'uni-sociology', label: 'Sociology & Criminology', icon: '🤝',
+      description: 'Social theory, inequality, crime, justice and research methods.',
+      modules: [
+        { id: 'soton-socio-1', label: 'Sociology 1', provider: 'University of Southampton', description: 'Social theory, inequality, crime and research methods.' },
+        { id: 'ucl-socio-1', label: 'Sociology 1', provider: 'UCL', description: 'Classical theory, modern society and social research.' },
+        { id: 'edinburgh-socio-1', label: 'Sociology 1', provider: 'University of Edinburgh', description: 'Sociological imagination, social divisions and research skills.' },
+        { id: 'cambridge-socio-1', label: 'Sociology 1', provider: 'University of Cambridge', description: 'Social theory, comparative sociology and methods.' },
+      ],
+    },
+    {
+      id: 'uni-nursing', label: 'Nursing & Midwifery', icon: '🩺',
+      description: 'Clinical practice, patient care, healthcare sciences and public health.',
+      modules: [
+        { id: 'soton-nurs-1', label: 'Nursing 1', provider: 'University of Southampton', description: 'Foundations of nursing practice, anatomy and physiology.' },
+        { id: 'ucl-nurs-1', label: 'Nursing 1', provider: 'UCL', description: 'Clinical skills, health sciences and evidence-based practice.' },
+        { id: 'edinburgh-nurs-1', label: 'Nursing 1', provider: 'University of Edinburgh', description: 'Nursing practice, life sciences and professional development.' },
+      ],
+    },
+    {
+      id: 'uni-oceanography', label: 'Ocean & Earth Sciences', icon: '🌊',
+      description: 'Marine ecosystems, ocean dynamics, climate science, geology and geophysics.',
+      modules: [
+        { id: 'soton-ocean-1', label: 'Ocean & Earth Science 1', provider: 'University of Southampton', description: 'Oceanography, marine biology, geology and climate dynamics.' },
+        { id: 'edinburgh-ocean-1', label: 'Earth Sciences 1', provider: 'University of Edinburgh', description: 'Geology, geophysics, ocean systems and environmental change.' },
+        { id: 'ucl-ocean-1', label: 'Earth Sciences 1', provider: 'UCL', description: 'Earth systems, palaeontology, geochemistry and sediments.' },
+        { id: 'cambridge-ocean-nst', label: 'Natural Sciences: Earth Sciences', provider: 'University of Cambridge', description: 'Solid earth, ocean systems, climate and environmental science.' },
+      ],
+    },
+    {
+      id: 'uni-music', label: 'Music', icon: '🎵',
+      description: 'Performance, composition, musicology, analysis and music technology.',
+      modules: [
+        { id: 'soton-music-1', label: 'Music 1', provider: 'University of Southampton', description: 'Music history, analysis, composition and performance.' },
+        { id: 'ucl-music-1', label: 'Music 1', provider: 'UCL', description: 'Music history, theory, analysis and performance studies.' },
+        { id: 'edinburgh-music-1', label: 'Music 1', provider: 'University of Edinburgh', description: 'Musicology, composition, performance and technology.' },
+        { id: 'cambridge-music-1', label: 'Music 1', provider: 'University of Cambridge', description: 'Historical musicology, analysis, composition and performance.' },
+      ],
+    },
+    {
+      id: 'uni-education', label: 'Education', icon: '🎓',
+      description: 'Pedagogy, learning theory, educational psychology, policy and research.',
+      modules: [
+        { id: 'soton-edu-1', label: 'Education 1', provider: 'University of Southampton', description: 'Learning theories, educational policy and research methods.' },
+        { id: 'ucl-edu-1', label: 'Education 1', provider: 'UCL', description: 'Education policy, pedagogy, psychology and social justice.' },
+        { id: 'edinburgh-edu-1', label: 'Education 1', provider: 'University of Edinburgh', description: 'Philosophy of education, curriculum and child development.' },
+        { id: 'cambridge-edu-1', label: 'Education 1', provider: 'University of Cambridge', description: 'Psychology, sociology, history and philosophy of education.' },
+      ],
+    },
+    {
+      id: 'uni-languages', label: 'Languages & Linguistics', icon: '🗣️',
+      description: 'Modern languages, linguistics, translation and intercultural communication.',
+      modules: [
+        { id: 'soton-lang-1', label: 'Languages 1', provider: 'University of Southampton', description: 'Language structure, translation, cultural studies and linguistics.' },
+        { id: 'ucl-lang-1', label: 'Languages 1', provider: 'UCL', description: 'Phonetics, syntax, semantics and language acquisition.' },
+        { id: 'edinburgh-lang-1', label: 'Linguistics 1', provider: 'University of Edinburgh', description: 'Sounds, structure, meaning and sociolinguistics of language.' },
+        { id: 'cambridge-lang-1', label: 'Modern & Medieval Languages 1', provider: 'University of Cambridge', description: 'Language study, literature, linguistics and cultural history.' },
+      ],
+    },
+    {
+      id: 'uni-archaeology', label: 'Archaeology & Anthropology', icon: '🏺',
+      description: 'Human origins, material culture, ancient societies and ethnographic fieldwork.',
+      modules: [
+        { id: 'soton-arch-1', label: 'Archaeology 1', provider: 'University of Southampton', description: 'World prehistory, archaeological methods and material culture.' },
+        { id: 'ucl-arch-1', label: 'Archaeology 1', provider: 'UCL', description: 'Human evolution, world archaeology and anthropological theory.' },
+        { id: 'cambridge-arch-1', label: 'Archaeology 1', provider: 'University of Cambridge', description: 'Archaeological science, world prehistory and heritage.' },
+        { id: 'edinburgh-arch-1', label: 'Archaeology 1', provider: 'University of Edinburgh', description: 'Archaeological methods, theory and global prehistory.' },
+      ],
+    },
+    {
+      id: 'uni-fineart', label: 'Fine Art & Design', icon: '🎨',
+      description: 'Visual arts practice, art history, studio techniques, design thinking and curatorial studies.',
+      modules: [
+        { id: 'soton-art-1', label: 'Fine Art 1', provider: 'University of Southampton', description: 'Studio practice, art history, drawing and visual culture.' },
+        { id: 'ucl-art-1', label: 'Fine Art 1', provider: 'UCL', description: 'Fine art practice, critical studies and contemporary art.' },
+        { id: 'edinburgh-art-1', label: 'Art 1', provider: 'University of Edinburgh', description: 'Studio practice, art history and critical theory.' },
+        { id: 'cambridge-art-1', label: 'History of Art 1', provider: 'University of Cambridge', description: 'Art historical methods, Renaissance to modern art.' },
+      ],
+    },
   ],
 };
 
@@ -268,10 +534,6 @@ function CourseCard({ course, levelId, selectedBoard, onBoardChange, onSelect })
 function LandingHub({ onSelectLevel, onLogin, onOpenGuides, searchQuery, onSearchQueryChange, selectedBoards, onBoardChange, onSelectCourse }) {
   return (
     <div className="landing-shell">
-      <div className="landing-orb landing-orb-one" />
-      <div className="landing-orb landing-orb-two" />
-      <div className="landing-grid" />
-
       <LandingTopBar onLogin={onLogin} />
       <GlobalSearchBar levelId={null} onLevelChange={onSelectLevel} searchQuery={searchQuery} onSearchQueryChange={onSearchQueryChange} />
 
@@ -366,10 +628,6 @@ function CourseHub({ level, selectedBoards, onBoardChange, onSelectCourse, onBac
 
   return (
     <div className="landing-shell course-shell">
-      <div className="landing-orb landing-orb-one" />
-      <div className="landing-orb landing-orb-two" />
-      <div className="landing-grid" />
-
       <LandingTopBar onBack={onBackHome} />
       <GlobalSearchBar levelId={level.id} onLevelChange={onSelectLevel} searchQuery={searchQuery} onSearchQueryChange={onSearchQueryChange} />
 
@@ -385,7 +643,7 @@ function CourseHub({ level, selectedBoards, onBoardChange, onSelectCourse, onBac
               ← Change level
             </button>
             <div className="course-hero-note">
-              Choose a subject to enter a live course or preview a coming-soon branch.
+              Choose a subject, then pick a module from your university.
             </div>
           </div>
         </section>
@@ -407,13 +665,59 @@ function CourseHub({ level, selectedBoards, onBoardChange, onSelectCourse, onBac
   );
 }
 
+function ModuleHub({ course, onBack, onBackHome, onSelectModule }) {
+  const modules = course.modules || [];
+
+  return (
+    <div className="landing-shell course-shell">
+      <LandingTopBar onBack={onBackHome} />
+
+      <main className="landing-main">
+        <section className="module-hub-hero">
+          <button className="ghost-chip module-back-btn" onClick={onBack}>
+            ← Back to courses
+          </button>
+          <div className="module-hub-header">
+            <div>
+              <span className="course-hero-kicker">{course.icon} {course.label}</span>
+              <h1>Choose a module</h1>
+              <p>Select from available university modules below.</p>
+            </div>
+          </div>
+        </section>
+
+        <section className="module-grid">
+          {modules.map(mod => (
+            <div
+              key={mod.id}
+              className={`module-card${mod.implemented ? ' live' : ''}`}
+              role="button"
+              tabIndex={0}
+              onClick={() => onSelectModule(mod)}
+              onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onSelectModule(mod); } }}
+              aria-label={`Select ${mod.label}`}
+            >
+              <div className="module-card-icon">{course.icon}</div>
+              <div className="module-card-provider">{mod.provider}</div>
+              <div className="module-card-label">{mod.label}</div>
+              <div className="module-card-desc">{mod.description || ''}</div>
+              <div className="module-card-footer">
+                <span className={`module-card-state${mod.implemented ? ' live' : ''}`}>
+                  {mod.implemented ? 'Live' : 'Coming soon'}
+                </span>
+                <span className="module-card-arrow">→</span>
+              </div>
+            </div>
+          ))}
+        </section>
+      </main>
+    </div>
+  );
+}
+
 function CoursePlaceholder({ level, course, selectedBoard, onBack, onBackHome, searchQuery, onSearchQueryChange }) {
   return (
     <div className="landing-shell course-shell">
-      <div className="landing-orb landing-orb-one" />
-      <div className="landing-orb landing-orb-two" />
-      <div className="landing-grid" />
-
       <LandingTopBar onBack={onBackHome} />
       <GlobalSearchBar inCourse={true} searchQuery={searchQuery} onSearchQueryChange={onSearchQueryChange} />
 
@@ -422,11 +726,12 @@ function CoursePlaceholder({ level, course, selectedBoard, onBack, onBackHome, s
           <span className="landing-hero-kicker">{level.title}</span>
           <div className="placeholder-icon">{course.icon}</div>
           <h1>{course.label}</h1>
+          {course.provider && <div className="placeholder-board-chip">{course.provider}</div>}
           <p>{course.description}</p>
           {selectedBoard && <div className="placeholder-board-chip">Exam board: {selectedBoard}</div>}
           <div className="placeholder-actions">
             <button className="ghost-chip" onClick={onBack}>
-              ← Back to {level.title.toLowerCase()} courses
+              ← Back
             </button>
             <button className="solid-chip" onClick={onBackHome}>
               Back to hub
@@ -457,6 +762,7 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedLevelId, setSelectedLevelId] = useState(null);
   const [selectedCourseId, setSelectedCourseId] = useState(null);
+  const [selectedModuleId, setSelectedModuleId] = useState(null);
   const [selectedBoards, setSelectedBoards] = useState({});
   const [guidesSection, setGuidesSection] = useState(null);
   const expandAll    = useStore(s => s.expandAll);
@@ -469,7 +775,10 @@ export default function App() {
   const selectedCourse = selectedLevel
     ? (COURSE_OPTIONS[selectedLevel.id] || []).find(course => course.id === selectedCourseId) || null
     : null;
-  const isLivePhysics = selectedLevelId === 'uni' && selectedCourseId === 'uni-physics';
+  const selectedModule = selectedLevelId === 'uni' && selectedCourse
+    ? (selectedCourse.modules || []).find(m => m.id === selectedModuleId) || null
+    : null;
+  const hasLiveContent = selectedModule && selectedModule.implemented;
 
   function resetPhysicsUi() {
     if (formulaOpen) toggleFormula();
@@ -480,6 +789,7 @@ export default function App() {
   function goHome() {
     resetPhysicsUi();
     setSelectedCourseId(null);
+    setSelectedModuleId(null);
     setSelectedLevelId(null);
     setGuidesSection(null);
     setSearchQuery('');
@@ -494,6 +804,21 @@ export default function App() {
   function goBackToCourses() {
     resetPhysicsUi();
     setSelectedCourseId(null);
+    setSelectedModuleId(null);
+  }
+
+  function goBackToModules() {
+    resetPhysicsUi();
+    setSelectedModuleId(null);
+  }
+
+  function selectModule(mod) {
+    resetPhysicsUi();
+    setSelectedModuleId(mod.id);
+    if (mod.implemented) {
+      setModule(mod.module || mod.id);
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   function selectLevel(levelId) {
@@ -506,9 +831,7 @@ export default function App() {
   function selectCourse(course) {
     resetPhysicsUi();
     setSelectedCourseId(course.id);
-    if (course.implemented && course.module) {
-      setModule(course.module);
-    }
+    setSelectedModuleId(null);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -523,7 +846,7 @@ export default function App() {
 
   // Keyboard shortcut: Ctrl+E → expand all
   useEffect(() => {
-    if (!isLivePhysics) return undefined;
+    if (!hasLiveContent) return undefined;
 
     function onKey(e) {
       if ((e.ctrlKey || e.metaKey) && e.key === 'e') {
@@ -534,7 +857,7 @@ export default function App() {
     }
     document.addEventListener('keydown', onKey);
     return () => document.removeEventListener('keydown', onKey);
-  }, [expandAll, isLivePhysics]);
+  }, [expandAll, hasLiveContent]);
 
   if (guidesSection) {
     return <GuidesPage section={guidesSection} onBack={goHome} />;
@@ -548,21 +871,38 @@ export default function App() {
     return <LandingHub onSelectLevel={selectLevel} onLogin={openLogin} onOpenGuides={openGuides} searchQuery={searchQuery} onSearchQueryChange={setSearchQuery} selectedBoards={selectedBoards} onBoardChange={selectBoard} onSelectCourse={selectCourse} />;
   }
 
-  if (selectedCourse && !isLivePhysics) {
+  if (!selectedCourse) {
     return (
-      <CoursePlaceholder
-        level={selectedLevel}
+      <div className="app-shell">
+        <CourseHub
+          level={selectedLevel}
+          selectedBoards={selectedBoards}
+          onBoardChange={selectBoard}
+          onSelectCourse={selectCourse}
+          onBack={goHome}
+          onBackHome={goHome}
+          searchQuery={searchQuery}
+          onSearchQueryChange={setSearchQuery}
+          onSelectLevel={selectLevel}
+        />
+      </div>
+    );
+  }
+
+  // Uni course with modules → show module hub
+  if (selectedLevelId === 'uni' && selectedCourse.modules && selectedCourse.modules.length > 0 && !selectedModule) {
+    return (
+      <ModuleHub
         course={selectedCourse}
-        selectedBoard={selectedBoards[selectedCourse.id]}
         onBack={goBackToCourses}
         onBackHome={goHome}
-        searchQuery={searchQuery}
-        onSearchQueryChange={setSearchQuery}
+        onSelectModule={selectModule}
       />
     );
   }
 
-  if (selectedCourse && isLivePhysics) {
+  // Live content
+  if (hasLiveContent) {
     return (
       <div className="app-shell">
         <div className="content-shell-top">
@@ -570,7 +910,7 @@ export default function App() {
             <LogoMark />
             <div>
               <div className="landing-brand-kicker">Kerfox</div>
-              <div className="landing-brand-subtitle">University physics learning</div>
+              <div className="landing-brand-subtitle">{selectedModule.provider}</div>
             </div>
           </div>
           <button className="ghost-chip" onClick={goHome}>
@@ -585,11 +925,11 @@ export default function App() {
             <div className="main-inner">
 
               <header className="page-header">
-                <button className="page-header-link" onClick={goBackToCourses}>
-                  ← Back to university courses
+                <button className="page-header-link" onClick={goBackToModules}>
+                  ← Back to modules
                 </button>
-                <div className="page-header-badge">University Physics</div>
-                <h1>Lasers &amp; <em>Quanta</em></h1>
+                <div className="page-header-badge">{selectedModule.provider} · {selectedCourse.label}</div>
+                <h1>{selectedModule.label}</h1>
                 <p className="page-header-subtitle">Comprehensive Exam Question Bank with Model Answers</p>
                 <div className="page-stats">
                   <div>
@@ -646,20 +986,17 @@ export default function App() {
     );
   }
 
+  // Placeholder for non-implemented courses/modules
   return (
-    <div className="app-shell">
-      <CourseHub
-        level={selectedLevel}
-        selectedBoards={selectedBoards}
-        onBoardChange={selectBoard}
-        onSelectCourse={selectCourse}
-        onBack={goHome}
-        onBackHome={goHome}
-        searchQuery={searchQuery}
-        onSearchQueryChange={setSearchQuery}
-        onSelectLevel={selectLevel}
-      />
-    </div>
+    <CoursePlaceholder
+      level={selectedLevel}
+      course={selectedModule || selectedCourse}
+      selectedBoard={selectedBoards[selectedCourse.id]}
+      onBack={selectedModule ? goBackToModules : goBackToCourses}
+      onBackHome={goHome}
+      searchQuery={searchQuery}
+      onSearchQueryChange={setSearchQuery}
+    />
   );
 }
 

@@ -1,4 +1,6 @@
+import { useEffect, useState } from 'react';
 import { AUTH_ENV, AUTH_PROVIDERS, getAuthReadiness } from '../lib/auth/config.js';
+import { supabase } from '../lib/auth/supabase.js';
 
 function StatusChip({ ok, label }) {
   return <span className={`auth-status-chip${ok ? ' ready' : ''}`}>{label}</span>;
@@ -6,13 +8,31 @@ function StatusChip({ ok, label }) {
 
 export default function LoginPage({ onBack }) {
   const readiness = getAuthReadiness();
+  const [connectionStatus, setConnectionStatus] = useState('checking');
+
+  useEffect(() => {
+    let active = true;
+
+    async function checkConnection() {
+      if (!supabase) {
+        if (active) setConnectionStatus('missing-env');
+        return;
+      }
+
+      const { error } = await supabase.auth.getSession();
+      if (!active) return;
+
+      setConnectionStatus(error ? 'error' : 'connected');
+    }
+
+    checkConnection();
+    return () => {
+      active = false;
+    };
+  }, []);
 
   return (
     <div className="landing-shell login-shell">
-      <div className="landing-orb landing-orb-one" />
-      <div className="landing-orb landing-orb-two" />
-      <div className="landing-grid" />
-
       <div className="landing-topbar">
         <div className="landing-brand">
           <div className="brand-mark">
@@ -58,6 +78,17 @@ export default function LoginPage({ onBack }) {
             <strong>Environment check</strong>
             <div>VITE_SUPABASE_URL: {AUTH_ENV.supabaseUrl ? 'set' : 'not set'}</div>
             <div>VITE_SUPABASE_ANON_KEY: {AUTH_ENV.supabaseAnonKey ? 'set' : 'not set'}</div>
+            <div>
+              Supabase connection: {
+                connectionStatus === 'connected'
+                  ? 'connected'
+                  : connectionStatus === 'checking'
+                    ? 'checking...'
+                    : connectionStatus === 'missing-env'
+                      ? 'missing env vars'
+                      : 'connection failed'
+              }
+            </div>
           </div>
         </section>
       </main>

@@ -354,10 +354,6 @@ export default function GuidesPage({ section, onBack }) {
 
   return (
     <div className="landing-shell guides-shell">
-      <div className="landing-orb landing-orb-one" />
-      <div className="landing-orb landing-orb-two" />
-      <div className="landing-grid" />
-
       <TopBar onBack={onBack} />
 
       <main className="landing-main">
