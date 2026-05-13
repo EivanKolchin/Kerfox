@@ -9,6 +9,9 @@ function StatusChip({ ok, label }) {
 export default function LoginPage({ onBack }) {
   const readiness = getAuthReadiness();
   const [connectionStatus, setConnectionStatus] = useState('checking');
+  const [loadingProvider, setLoadingProvider] = useState(null);
+  const [authError, setAuthError] = useState('');
+  const [signedInEmail, setSignedInEmail] = useState('');
 
   useEffect(() => {
     let active = true;
@@ -23,6 +26,13 @@ export default function LoginPage({ onBack }) {
       if (!active) return;
 
       setConnectionStatus(error ? 'error' : 'connected');
+
+      if (!error) {
+        const { data } = await supabase.auth.getUser();
+        if (active) {
+          setSignedInEmail(data?.user?.email || '');
+        }
+      }
     }
 
     checkConnection();
@@ -30,6 +40,34 @@ export default function LoginPage({ onBack }) {
       active = false;
     };
   }, []);
+
+  async function handleProviderSignIn(provider) {
+    setAuthError('');
+
+    if (!supabase) {
+      setAuthError('Supabase client is not configured.');
+      return;
+    }
+
+    setLoadingProvider(provider.id);
+    const redirectTo = AUTH_ENV.redirectUrl || `${window.location.origin}/auth/callback`;
+
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: provider.id,
+      options: { redirectTo },
+    });
+
+    if (error) {
+      setAuthError(error.message || `Failed to start ${provider.label} sign in.`);
+      setLoadingProvider(null);
+    }
+  }
+
+  async function handleSignOut() {
+    if (!supabase) return;
+    await supabase.auth.signOut();
+    setSignedInEmail('');
+  }
 
   return (
     <div className="landing-shell login-shell">
@@ -67,17 +105,44 @@ export default function LoginPage({ onBack }) {
 
           <div className="login-provider-list">
             {AUTH_PROVIDERS.map(provider => (
-              <button key={provider.id} className="login-provider-btn" disabled>
+              <button
+                key={provider.id}
+                className="login-provider-btn"
+                disabled={!readiness[provider.readyFlag] || loadingProvider !== null}
+                onClick={() => handleProviderSignIn(provider)}
+              >
                 Continue with {provider.label}
-                <span>{readiness[provider.readyFlag] ? 'Configured' : 'Coming soon'}</span>
+                <span>
+                  {loadingProvider === provider.id
+                    ? 'Redirecting...'
+                    : readiness[provider.readyFlag]
+                      ? 'Configured'
+                      : 'Disabled in env'}
+                </span>
               </button>
             ))}
           </div>
+
+          {signedInEmail && (
+            <div className="login-env-note">
+              <strong>Signed in</strong>
+              <div>{signedInEmail}</div>
+              <button className="ghost-chip" onClick={handleSignOut}>Sign out</button>
+            </div>
+          )}
+
+          {authError && (
+            <div className="login-env-note">
+              <strong>Auth error</strong>
+              <div>{authError}</div>
+            </div>
+          )}
 
           <div className="login-env-note">
             <strong>Environment check</strong>
             <div>VITE_SUPABASE_URL: {AUTH_ENV.supabaseUrl ? 'set' : 'not set'}</div>
             <div>VITE_SUPABASE_ANON_KEY: {AUTH_ENV.supabaseAnonKey ? 'set' : 'not set'}</div>
+            <div>VITE_AUTH_REDIRECT_URL: {AUTH_ENV.redirectUrl ? AUTH_ENV.redirectUrl : 'not set (using window origin)'}</div>
             <div>
               Supabase connection: {
                 connectionStatus === 'connected'

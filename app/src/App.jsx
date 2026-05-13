@@ -1,14 +1,9 @@
 ﻿import { useEffect, useState } from 'react';
 import { useStore } from './store.js';
 import { topics } from './data/questions.js';
-import Sidebar from './components/Sidebar.jsx';
-import Toolbar from './components/Toolbar.jsx';
-import QuestionCard from './components/QuestionCard.jsx';
-import FormulaPanel from './components/FormulaPanel.jsx';
-import ExamModal from './components/ExamModal.jsx';
-import ResultsModal from './components/ResultsModal.jsx';
 import LoginPage from './components/LoginPage.jsx';
 import GuidesPage from './components/GuidesPage.jsx';
+import { supabase } from './lib/auth/supabase.js';
 
 const LEARNING_LEVELS = [
   {
@@ -743,17 +738,147 @@ function CoursePlaceholder({ level, course, selectedBoard, onBack, onBackHome, s
   );
 }
 
-function TopicSection({ topic }) {
+const DIFF_LABELS = { easy: 'Easy', medium: 'Med', hard: 'Hard' };
+
+function FocusQuestionCard({ question, topicId }) {
+  const { qid, num, textHtml, marks, answerHtml, advanced } = question;
+  const expandedCards  = useStore(s => s.expandedCards);
+  const toggleCard     = useStore(s => s.toggleCard);
+  const difficulties   = useStore(s => s.difficulties);
+  const setDifficulty  = useStore(s => s.setDifficulty);
+  const records        = useStore(s => s.records);
+  const hideEasy       = useStore(s => s.hideEasy);
+  const searchQuery    = useStore(s => s.searchQuery);
+  const activeFolder   = useStore(s => s.activeFolder);
+  const getFolder      = useStore(s => s.getFolder);
+
+  const diff   = difficulties[qid];
+  const rec    = records[qid] || { right: 0, wrong: 0 };
+  const isOpen = !!expandedCards[qid];
+  const folder = getFolder(qid);
+
+  if (hideEasy && diff === 'easy') return null;
+  if (searchQuery) {
+    const q = searchQuery.toLowerCase();
+    const text = (textHtml + answerHtml).toLowerCase();
+    if (!text.includes(q)) return null;
+  }
+  if (activeFolder !== 'all' && folder !== activeFolder) return null;
+
   return (
-    <section className="topic-section" id={topic.id}>
-      <div className="topic-header">
-        <span className="topic-num-badge">{topic.topicNum}</span>
-        <h2 className="topic-title">{topic.title}</h2>
+    <div className={`focus-q${advanced ? ' advanced' : ''}${isOpen ? ' open' : ''}`} data-qid={qid}>
+      <div className="focus-q-head" onClick={() => toggleCard(qid)}>
+        <div className="focus-q-num">{num.replace('Q', '').replace('H', 'H')}</div>
+        <div className="focus-q-text" dangerouslySetInnerHTML={{ __html: textHtml }} />
+        <div className="focus-q-meta">
+          <span className="focus-q-marks">{marks}m</span>
+          {diff && <span className={`focus-q-diff ${diff}`}>{DIFF_LABELS[diff]}</span>}
+          <button className={`focus-q-toggle${isOpen ? ' open' : ''}`}>
+            ▾
+          </button>
+        </div>
+      </div>
+
+      <div className={`focus-q-answer${isOpen ? ' open' : ''}`}>
+        <div className="focus-q-answer-inner">
+          <div className="focus-q-answer-body">
+            <div dangerouslySetInnerHTML={{ __html: answerHtml }} />
+
+            <div className="focus-diff-row">
+              <span className="focus-diff-label">Rate:</span>
+              {['easy', 'medium', 'hard'].map(level => (
+                <button
+                  key={level}
+                  className={`focus-diff-btn focus-diff-btn-${level}${diff === level ? ' active' : ''}`}
+                  onClick={e => { e.stopPropagation(); setDifficulty(qid, level); }}
+                >
+                  {level.charAt(0).toUpperCase() + level.slice(1)}
+                </button>
+              ))}
+              {(rec.right + rec.wrong > 0) && (
+                <div className="focus-record">
+                  <span className="focus-record-right">✓{rec.right}</span>
+                  <span className="focus-record-wrong">✗{rec.wrong}</span>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function FocusTopicSection({ topic }) {
+  return (
+    <section className="focus-section" id={topic.id}>
+      <div className="focus-section-head">
+        <span className="focus-section-num">{topic.topicNum}</span>
+        <h2 className="focus-section-title">{topic.title}</h2>
       </div>
       {topic.questions.map(q => (
-        <QuestionCard key={q.qid} question={q} topicId={topic.id} />
+        <FocusQuestionCard key={q.qid} question={q} topicId={topic.id} />
       ))}
     </section>
+  );
+}
+
+function FocusContent({ module, course, onBack }) {
+  const [activeTopic, setActiveTopic] = useState(null);
+  const totalQ = topics.reduce((n, t) => n + t.questions.length, 0);
+
+  useEffect(() => {
+    if (!activeTopic && topics.length > 0) setActiveTopic(topics[0].id);
+  }, []);
+
+  function scrollToTopic(id) {
+    setActiveTopic(id);
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  return (
+    <div className="focus-shell">
+      <div className="focus-topbar">
+        <div className="focus-topbar-brand">
+          <div className="brand-mark" style={{ width: 36, height: 36, borderRadius: 10 }}>
+            <img src="/kerfox.png" alt="Kerfox" />
+          </div>
+          <div>
+            <div className="focus-topbar-brand-name">Lasers &amp; Quanta</div>
+            <div className="focus-topbar-brand-sub">{module.provider}</div>
+          </div>
+        </div>
+        <button className="focus-topbar-back" onClick={onBack}>
+          ← Back
+        </button>
+      </div>
+
+      <div className="focus-body">
+        <header className="focus-header">
+          <div className="focus-header-badge">{totalQ} questions · {topics.length} topics</div>
+          <h1>Lasers &amp; <em>Quanta</em></h1>
+          <p>PHYS1204 Exam Question Bank — tap any card to reveal the answer</p>
+        </header>
+
+        <div className="focus-tabs">
+          {topics.map(t => (
+            <button
+              key={t.id}
+              className={`focus-tab${activeTopic === t.id ? ' active' : ''}`}
+              onClick={() => scrollToTopic(t.id)}
+            >
+              {t.topicNum.replace('Topic ', 'T')}
+            </button>
+          ))}
+        </div>
+
+        {topics.map(t => <FocusTopicSection key={t.id} topic={t} />)}
+      </div>
+
+      <button className="focus-totop" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+        ↑
+      </button>
+    </div>
   );
 }
 
@@ -859,6 +984,26 @@ export default function App() {
     return () => document.removeEventListener('keydown', onKey);
   }, [expandAll, hasLiveContent]);
 
+  useEffect(() => {
+    async function handleAuthCallback() {
+      if (!supabase) return;
+
+      const isAuthCallback = window.location.pathname === '/auth/callback';
+      if (!isAuthCallback) return;
+
+      const code = new URLSearchParams(window.location.search).get('code');
+      if (code) {
+        await supabase.auth.exchangeCodeForSession(code);
+      }
+
+      window.history.replaceState({}, '', '/');
+      setPage('login');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    handleAuthCallback();
+  }, []);
+
   if (guidesSection) {
     return <GuidesPage section={guidesSection} onBack={goHome} />;
   }
@@ -901,89 +1046,9 @@ export default function App() {
     );
   }
 
-  // Live content
+  // Live content — focus theme
   if (hasLiveContent) {
-    return (
-      <div className="app-shell">
-        <div className="content-shell-top">
-          <div className="landing-brand">
-            <LogoMark />
-            <div>
-              <div className="landing-brand-kicker">Kerfox</div>
-              <div className="landing-brand-subtitle">{selectedModule.provider}</div>
-            </div>
-          </div>
-          <button className="ghost-chip" onClick={goHome}>
-            ← Back to learning hub
-          </button>
-        </div>
-
-        <div className="app-layout">
-          <Sidebar />
-
-          <div className="main-content">
-            <div className="main-inner">
-
-              <header className="page-header">
-                <button className="page-header-link" onClick={goBackToModules}>
-                  ← Back to modules
-                </button>
-                <div className="page-header-badge">{selectedModule.provider} · {selectedCourse.label}</div>
-                <h1>{selectedModule.label}</h1>
-                <p className="page-header-subtitle">Comprehensive Exam Question Bank with Model Answers</p>
-                <div className="page-stats">
-                  <div>
-                    <div className="page-stat-n">114</div>
-                    <div className="page-stat-label">Exam Questions</div>
-                  </div>
-                  <div>
-                    <div className="page-stat-n">20</div>
-                    <div className="page-stat-label">Advanced Challenge</div>
-                  </div>
-                  <div>
-                    <div className="page-stat-n">9</div>
-                    <div className="page-stat-label">Topics</div>
-                  </div>
-                  <div>
-                    <div className="page-stat-n">✓</div>
-                    <div className="page-stat-label">Model Answers</div>
-                  </div>
-                </div>
-              </header>
-
-              <Toolbar />
-              <GlobalSearchBar inCourse={true} searchQuery={searchQuery} onSearchQueryChange={setSearchQuery} />
-
-              <div className="reading-box">
-                <div className="reading-box-title">Core Reading</div>
-                <div className="reading-tags">
-                  {[
-                    'Pedrotti et al. - Introduction to Optics (3rd ed.)',
-                    'Feynman, Leighton & Sands - Lectures on Physics',
-                    'Hecht - Optics (7th ed.)',
-                    'Feynman - QED: The Strange Theory of Light and Matter',
-                  ].map(t => <span key={t} className="reading-tag">{t}</span>)}
-                </div>
-              </div>
-
-              {topics.filter(t => !searchQuery || t.title.toLowerCase().includes(searchQuery.toLowerCase()) || t.questions.some(q => q.title.toLowerCase().includes(searchQuery.toLowerCase()))).map(t => <TopicSection key={t.id} topic={t} />)}
-            </div>
-
-            <button
-              className="totop"
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              title="Back to top"
-            >
-              ↑
-            </button>
-          </div>
-
-          <FormulaPanel />
-          <ExamModal />
-          <ResultsModal />
-        </div>
-      </div>
-    );
+    return <FocusContent module={selectedModule} course={selectedCourse} onBack={goHome} />;
   }
 
   // Placeholder for non-implemented courses/modules
