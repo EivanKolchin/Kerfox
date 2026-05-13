@@ -782,6 +782,7 @@ function FocusQuestionCard({ question, topicId }) {
       <div className={`focus-q-answer${isOpen ? ' open' : ''}`}>
         <div className="focus-q-answer-inner">
           <div className="focus-q-answer-body">
+            <div className="focus-answer-label">EXAM MODEL ANSWER</div>
             <div dangerouslySetInnerHTML={{ __html: answerHtml }} />
 
             <div className="focus-diff-row">
