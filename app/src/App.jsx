@@ -4,6 +4,7 @@ import { topics } from './data/questions.js';
 import LoginPage from './components/LoginPage.jsx';
 import GuidesPage from './components/GuidesPage.jsx';
 import { supabase } from './lib/auth/supabase.js';
+import { decodeAppState, pushAppState, replaceAppState } from './lib/routing.js';
 
 const LEARNING_LEVELS = [
   {
@@ -98,7 +99,7 @@ const COURSE_OPTIONS = {
   uni: [
     {
       id: 'uni-physics', label: 'Physics', icon: '⚛️',
-      description: 'Core physical theory — mechanics, electromagnetism, thermodynamics, waves, optics, and quantum physics.',
+      description: 'Core physical theory - mechanics, electromagnetism, thermodynamics, waves, optics, and quantum physics.',
       modules: [
         { id: 'soton-phys1204', label: 'Lasers & Quanta (PHYS1204)', provider: 'University of Southampton', description: 'Laser physics, quantum mechanics, and atomic theory with exam question bank.', implemented: true, module: 'lasers' },
         { id: 'soton-maths-methods', label: 'Maths Methods 1b', provider: 'University of Southampton', description: 'Vector calculus, differential equations, and linear algebra for physics.' },
@@ -123,7 +124,7 @@ const COURSE_OPTIONS = {
     },
     {
       id: 'uni-maths', label: 'Mathematics', icon: '∫',
-      description: 'Pure and applied mathematics — algebra, analysis, geometry, statistics, and modelling.',
+      description: 'Pure and applied mathematics - algebra, analysis, geometry, statistics, and modelling.',
       modules: [
         { id: 'soton-math1054', label: 'Maths Methods 1b', provider: 'University of Southampton', description: 'Vector calculus, differential equations and linear algebra.' },
         { id: 'ucl-math-methods1', label: 'Mathematical Methods 1', provider: 'UCL', description: 'Calculus, linear algebra, sequences and series.' },
@@ -173,7 +174,7 @@ const COURSE_OPTIONS = {
     },
     {
       id: 'uni-medicine', label: 'Medicine', icon: '⚕',
-      description: 'Pre-clinical and clinical foundations — anatomy, physiology, pharmacology and pathology.',
+      description: 'Pre-clinical and clinical foundations - anatomy, physiology, pharmacology and pathology.',
       modules: [
         { id: 'soton-med-1', label: 'Foundations of Medicine', provider: 'University of Southampton', description: 'Anatomy, physiology, biochemistry and clinical skills.' },
         { id: 'ucl-med-1', label: 'Medical Sciences 1', provider: 'UCL', description: 'Cell biology, genetics, anatomy and physiology.' },
@@ -197,7 +198,7 @@ const COURSE_OPTIONS = {
     },
     {
       id: 'uni-chemistry', label: 'Chemistry', icon: '⚗️',
-      description: 'Molecular science — organic, inorganic, physical, analytical and computational chemistry.',
+      description: 'Molecular science - organic, inorganic, physical, analytical and computational chemistry.',
       modules: [
         { id: 'soton-chem-1', label: 'Chemistry 1', provider: 'University of Southampton', description: 'Organic, inorganic and physical chemistry foundations.' },
         { id: 'ucl-chem-1', label: 'Chemistry 1', provider: 'UCL', description: 'Bonding, structure, reactivity and spectroscopy.' },
@@ -256,7 +257,7 @@ const COURSE_OPTIONS = {
     },
     {
       id: 'uni-history', label: 'History', icon: '⌛',
-      description: 'Historical analysis across periods and geographies — primary sources, interpretation and argument.',
+      description: 'Historical analysis across periods and geographies - primary sources, interpretation and argument.',
       modules: [
         { id: 'soton-hist-1', label: 'History 1', provider: 'University of Southampton', description: 'Early modern, modern European and global history.' },
         { id: 'ucl-hist-1', label: 'History 1', provider: 'UCL', description: 'Medieval, early modern and modern British and European history.' },
@@ -288,7 +289,7 @@ const COURSE_OPTIONS = {
     },
     {
       id: 'uni-geography', label: 'Geography', icon: '⛰',
-      description: 'Human and physical geography — climate, landscapes, urban systems and global development.',
+      description: 'Human and physical geography - climate, landscapes, urban systems and global development.',
       modules: [
         { id: 'soton-geog-1', label: 'Geography 1', provider: 'University of Southampton', description: 'Human geography, physical geography and GIS.' },
         { id: 'ucl-geog-1', label: 'Geography 1', provider: 'UCL', description: 'Globalisation, environmental change and geographical methods.' },
@@ -858,7 +859,7 @@ function FocusContent({ module, course, onBack }) {
         <header className="focus-header">
           <div className="focus-header-badge">{totalQ} questions · {topics.length} topics</div>
           <h1>Lasers &amp; <em>Quanta</em></h1>
-          <p>PHYS1204 Exam Question Bank — tap any card to reveal the answer</p>
+          <p>PHYS1204 Exam Question Bank - tap any card to reveal the answer</p>
         </header>
 
         <div className="focus-tabs">
@@ -884,13 +885,14 @@ function FocusContent({ module, course, onBack }) {
 }
 
 export default function App() {
-  const [page, setPage] = useState('learn');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedLevelId, setSelectedLevelId] = useState(null);
-  const [selectedCourseId, setSelectedCourseId] = useState(null);
-  const [selectedModuleId, setSelectedModuleId] = useState(null);
+  const initialState = decodeAppState(window.location.hash);
+  const [page, setPage] = useState(initialState.page);
+  const [searchQuery, setSearchQuery] = useState(initialState.searchQuery);
+  const [selectedLevelId, setSelectedLevelId] = useState(initialState.selectedLevelId);
+  const [selectedCourseId, setSelectedCourseId] = useState(initialState.selectedCourseId);
+  const [selectedModuleId, setSelectedModuleId] = useState(initialState.selectedModuleId);
   const [selectedBoards, setSelectedBoards] = useState({});
-  const [guidesSection, setGuidesSection] = useState(null);
+  const [guidesSection, setGuidesSection] = useState(initialState.guidesSection);
   const expandAll    = useStore(s => s.expandAll);
   const setModule    = useStore(s => s.setModule);
   const formulaOpen  = useStore(s => s.formulaOpen);
@@ -898,6 +900,43 @@ export default function App() {
   const closeExam    = useStore(s => s.closeExam);
   const closeResults = useStore(s => s.closeResults);
   const selectedLevel = LEARNING_LEVELS.find(level => level.id === selectedLevelId) || null;
+
+  useEffect(() => {
+    function handleHashChange() {
+      const newState = decodeAppState(window.location.hash);
+      setPage(newState.page);
+      setSearchQuery(newState.searchQuery);
+      setSelectedLevelId(newState.selectedLevelId);
+      setSelectedCourseId(newState.selectedCourseId);
+      setSelectedModuleId(newState.selectedModuleId);
+      setGuidesSection(newState.guidesSection);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    window.addEventListener('hashchange', handleHashChange);
+    window.addEventListener('popstate', handleHashChange);
+
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+      window.removeEventListener('popstate', handleHashChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (searchQuery) {
+        pushAppState({
+          page,
+          selectedLevelId,
+          selectedCourseId,
+          selectedModuleId,
+          guidesSection,
+          searchQuery,
+        });
+      }
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [searchQuery, page, selectedLevelId, selectedCourseId, selectedModuleId, guidesSection]);
   const selectedCourse = selectedLevel
     ? (COURSE_OPTIONS[selectedLevel.id] || []).find(course => course.id === selectedCourseId) || null
     : null;
@@ -920,10 +959,27 @@ export default function App() {
     setGuidesSection(null);
     setSearchQuery('');
     setPage('learn');
+    replaceAppState({
+      page: 'learn',
+      selectedLevelId: null,
+      selectedCourseId: null,
+      selectedModuleId: null,
+      guidesSection: null,
+      searchQuery: '',
+    });
   }
 
   function openGuides(section) {
     setGuidesSection(section || 'all');
+    setPage('learn');
+    pushAppState({
+      page: 'learn',
+      selectedLevelId,
+      selectedCourseId,
+      selectedModuleId,
+      guidesSection: section || 'all',
+      searchQuery,
+    });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -944,6 +1000,14 @@ export default function App() {
     if (mod.implemented) {
       setModule(mod.module || mod.id);
     }
+    pushAppState({
+      page,
+      selectedLevelId,
+      selectedCourseId,
+      selectedModuleId: mod.id,
+      guidesSection,
+      searchQuery,
+    });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -951,6 +1015,14 @@ export default function App() {
     resetPhysicsUi();
     setSelectedLevelId(levelId);
     setSelectedCourseId(null);
+    pushAppState({
+      page,
+      selectedLevelId: levelId,
+      selectedCourseId: null,
+      selectedModuleId: null,
+      guidesSection,
+      searchQuery,
+    });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -958,6 +1030,14 @@ export default function App() {
     resetPhysicsUi();
     setSelectedCourseId(course.id);
     setSelectedModuleId(null);
+    pushAppState({
+      page,
+      selectedLevelId,
+      selectedCourseId: course.id,
+      selectedModuleId: null,
+      guidesSection,
+      searchQuery,
+    });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -967,6 +1047,14 @@ export default function App() {
 
   function openLogin() {
     setPage('login');
+    pushAppState({
+      page: 'login',
+      selectedLevelId,
+      selectedCourseId,
+      selectedModuleId,
+      guidesSection,
+      searchQuery,
+    });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -1047,7 +1135,7 @@ export default function App() {
     );
   }
 
-  // Live content — focus theme
+  // Live content - focus theme
   if (hasLiveContent) {
     return <FocusContent module={selectedModule} course={selectedCourse} onBack={goHome} />;
   }

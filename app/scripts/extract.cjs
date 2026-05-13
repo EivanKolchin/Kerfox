@@ -38,12 +38,29 @@ root.querySelectorAll('.topic-section').forEach(section => {
     const textHtml = textSpan ? textSpan.innerHTML : '';
     const marksText = marksSpan ? marksSpan.text.trim() : '4 marks';
     const marks = parseInt(marksText) || 4;
-    const answerHtml = answerDiv ? answerDiv.innerHTML : '';
+    const rawHtml = answerDiv ? answerDiv.innerHTML : '';
+
+    // Extract model answer separately (the short answer box before the deep dive)
+    const modelAnswerDiv = card.querySelector('.model-answer');
+    const modelAnswerHtml = modelAnswerDiv
+      ? '<div class="model-answer">' + modelAnswerDiv.innerHTML.trim() + '</div>'
+      : '';
+
+    // Strip model answer from the full answerHtml to avoid duplication
+    let answerHtml = rawHtml;
+    if (modelAnswerDiv) {
+      const modelOuter = modelAnswerDiv.outerHTML;
+      const idx = answerHtml.indexOf(modelOuter);
+      if (idx !== -1) {
+        answerHtml = answerHtml.slice(0, idx) + answerHtml.slice(idx + modelOuter.length);
+      }
+    }
+    answerHtml = answerHtml.trim();
 
     // Generate stable ID
     const qid = 'qid_' + num.replace(/\s+/g, '');
 
-    questions.push({ qid, num, textHtml, marks, answerHtml, advanced });
+    questions.push({ qid, num, textHtml, marks, modelAnswerHtml, answerHtml, advanced });
   });
 
   if (questions.length) {

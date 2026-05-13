@@ -69,17 +69,17 @@ const GUIDE_SECTIONS = [
     tips: [
       {
         title: 'Active recall',
-        summary: 'Test yourself instead of re-reading. Close the book and retrieve the information from memory — that is what strengthens neural pathways.',
+        summary: 'Test yourself instead of re-reading. Close the book and retrieve the information from memory - that is what strengthens neural pathways.',
         research: (
           <>
             <p><strong>What research found:</strong> Karpicke &amp; Roediger (2008) demonstrated that students who practiced retrieval remembered ~50% more after one week than those who only re-studied. The effect holds across subjects from biology to history.</p>
-            <p><strong>What it means for you:</strong> Replace passive re-reading with flashcards, practice questions, or explaining a topic from memory. Every retrieval attempt — even failed ones — strengthens learning.</p>
+            <p><strong>What it means for you:</strong> Replace passive re-reading with flashcards, practice questions, or explaining a topic from memory. Every retrieval attempt - even failed ones - strengthens learning.</p>
           </>
         ),
       },
       {
         title: 'Spaced repetition',
-        summary: 'Review material at increasing intervals — 1 day, 3 days, 1 week, 1 month. This aligns with how memory consolidation works.',
+        summary: 'Review material at increasing intervals - 1 day, 3 days, 1 week, 1 month. This aligns with how memory consolidation works.',
         research: (
           <>
             <p><strong>What research found:</strong> Cepeda et al. (2006, 2008) showed that spaced practice produces dramatically better long-term retention than massed (cramming) practice. The optimal gap between study sessions is about 10–20% of the time you want to remember the material.</p>
@@ -94,7 +94,7 @@ const GUIDE_SECTIONS = [
         research: (
           <>
             <p><strong>What research found:</strong> Rohrer (2012) found that interleaving led to 43% higher test scores than blocked practice. The effect is strongest in maths and science but applies broadly.</p>
-            <p><strong>Why it works:</strong> Interleaving forces you to identify <em>which</em> strategy fits the problem before solving it — a skill that mirrors real exam conditions.</p>
+            <p><strong>Why it works:</strong> Interleaving forces you to identify <em>which</em> strategy fits the problem before solving it - a skill that mirrors real exam conditions.</p>
             <p><strong>What it means for you:</strong> If you have three topics to revise, mix questions from all three in each session rather than finishing one topic entirely before moving on.</p>
           </>
         ),
@@ -104,16 +104,16 @@ const GUIDE_SECTIONS = [
         summary: 'Explain ideas in your own words and connect them to real-world examples. Ask "why" and "how" questions.',
         research: (
           <>
-            <p><strong>What research found:</strong> Dunlosky et al. (2013) rated elaborative interrogation and self-explanation as "moderate to high utility" — particularly effective for complex material.</p>
+            <p><strong>What research found:</strong> Dunlosky et al. (2013) rated elaborative interrogation and self-explanation as "moderate to high utility" - particularly effective for complex material.</p>
             <p><strong>What it means for you:</strong> When studying a concept, ask yourself: "How does this relate to something I already know? Can I think of an example from everyday life?" Teaching someone else is one of the best elaboration strategies.</p>
           </>
         ),
       },
     ],
     sources: [
-      { label: 'Dunlosky et al. (2013) — Improving Students\' Learning With Effective Learning Techniques', url: 'https://journals.sagepub.com/doi/10.1177/1529100612453266' },
-      { label: 'Brown, Roediger & McDaniel — "Make It Stick: The Science of Successful Learning"' },
-      { label: 'Karpicke & Roediger (2008) — The Critical Importance of Retrieval for Learning', url: 'https://doi.org/10.1126/science.1152408' },
+      { label: 'Dunlosky et al. (2013) - Improving Students\' Learning With Effective Learning Techniques', url: 'https://journals.sagepub.com/doi/10.1177/1529100612453266' },
+      { label: 'Brown, Roediger & McDaniel - "Make It Stick: The Science of Successful Learning"' },
+      { label: 'Karpicke & Roediger (2008) - The Critical Importance of Retrieval for Learning', url: 'https://doi.org/10.1126/science.1152408' },
     ],
   },
   {
@@ -140,7 +140,7 @@ const GUIDE_SECTIONS = [
           <>
             <p><strong>What research found:</strong> Hillman et al. (2008) showed that children and young adults who were more physically active had superior academic performance and cognitive control. Exercise increases BDNF (brain-derived neurotrophic factor), a protein that supports neuron growth.</p>
             <p><strong>Data point:</strong>A 2019 meta-analysis found that students who exercised 3+ times per week had 0.3–0.5 SD higher GPAs than sedentary peers.</p>
-            <p><strong>What it means for you:</strong> A brisk walk, jog, or 20-minute workout before a study session can sharpen focus. Use movement as a break — it's more restorative than scrolling your phone.</p>
+            <p><strong>What it means for you:</strong> A brisk walk, jog, or 20-minute workout before a study session can sharpen focus. Use movement as a break - it's more restorative than scrolling your phone.</p>
           </>
         ),
       },
@@ -160,15 +160,15 @@ const GUIDE_SECTIONS = [
         research: (
           <>
             <p><strong>What research found:</strong> Ericsson et al. (1993) found that elite performers practice in focused sessions of ~90 minutes with rest in between. The brain's attentional resources deplete after 45–60 minutes of intense focus; a short break restores them.</p>
-            <p><strong>What it means for you:</strong> Use a timer. During breaks, step away from your desk — stretch, walk, hydrate. Avoid screens if possible. Your brain needs true rest, not just a different stimulus.</p>
+            <p><strong>What it means for you:</strong> Use a timer. During breaks, step away from your desk - stretch, walk, hydrate. Avoid screens if possible. Your brain needs true rest, not just a different stimulus.</p>
           </>
         ),
       },
     ],
     sources: [
-      { label: 'Walker — "Why We Sleep" (2017)', url: 'https://www.sleepdiplomat.com/' },
-      { label: 'Hillman, Erickson & Kramer (2008) — Exercise and the Brain', url: 'https://doi.org/10.1038/nrn2298' },
-      { label: 'Gomez-Pinilla (2008) — Brain foods: the effects of nutrients on brain function', url: 'https://doi.org/10.1038/nrn2421' },
+      { label: 'Walker - "Why We Sleep" (2017)', url: 'https://www.sleepdiplomat.com/' },
+      { label: 'Hillman, Erickson & Kramer (2008) - Exercise and the Brain', url: 'https://doi.org/10.1038/nrn2298' },
+      { label: 'Gomez-Pinilla (2008) - Brain foods: the effects of nutrients on brain function', url: 'https://doi.org/10.1038/nrn2421' },
     ],
   },
   {
@@ -179,10 +179,10 @@ const GUIDE_SECTIONS = [
     tips: [
       {
         title: 'Stress management',
-        summary: 'Moderate stress can enhance performance — but chronic stress impairs memory and health. Learn to recognise your stress signals and act early.',
+        summary: 'Moderate stress can enhance performance - but chronic stress impairs memory and health. Learn to recognise your stress signals and act early.',
         research: (
           <>
-            <p><strong>What research found:</strong> Crum &amp; Langer (2007) showed that mindset about stress matters: students who viewed stress as enhancing (rather than debilitating) had better health and performance outcomes. The Yerkes-Dodson law describes an inverted-U relationship — moderate stress sharpens focus, but too much impairs it.</p>
+            <p><strong>What research found:</strong> Crum &amp; Langer (2007) showed that mindset about stress matters: students who viewed stress as enhancing (rather than debilitating) had better health and performance outcomes. The Yerkes-Dodson law describes an inverted-U relationship - moderate stress sharpens focus, but too much impairs it.</p>
             <p><strong>What it means for you:</strong> Reframe exam stress as your body preparing to perform. Use deep breathing (4 counts in, 6 counts out) to regulate your nervous system during study sessions and before exams.</p>
           </>
         ),
@@ -199,11 +199,11 @@ const GUIDE_SECTIONS = [
       },
       {
         title: 'Imposter syndrome',
-        summary: 'Feeling like you do not belong or will be "found out" is incredibly common. It affects 70% of people at some point — including high achievers.',
+        summary: 'Feeling like you do not belong or will be "found out" is incredibly common. It affects 70% of people at some point - including high achievers.',
         research: (
           <>
             <p><strong>What research found:</strong> Clance &amp; Imes (1978) first described imposter phenomenon, noting that high-achieving individuals often attribute success to luck rather than ability. More recent research (Sakulku &amp; Alexander, 2011) shows it is especially prevalent in academic settings and among underrepresented groups.</p>
-            <p><strong>What it means for you:</strong> Talk to peers — you will likely find they feel the same way. Keep a "success file" of positive feedback and achievements. Reframe "I do not know this yet" as a learning opportunity, not a failing.</p>
+            <p><strong>What it means for you:</strong> Talk to peers - you will likely find they feel the same way. Keep a "success file" of positive feedback and achievements. Reframe "I do not know this yet" as a learning opportunity, not a failing.</p>
           </>
         ),
       },
@@ -219,9 +219,9 @@ const GUIDE_SECTIONS = [
       },
     ],
     sources: [
-      { label: 'Crum & Langer (2007) — Mindset and Stress', url: 'https://doi.org/10.1037/0022-3514.92.4.716' },
-      { label: 'Zeidan et al. (2010) — Mindfulness Meditation Improves Cognition', url: 'https://doi.org/10.1016/j.cognition.2010.03.006' },
-      { label: 'Clance & Imes (1978) — The Imposter Phenomenon in High Achieving Women' },
+      { label: 'Crum & Langer (2007) - Mindset and Stress', url: 'https://doi.org/10.1037/0022-3514.92.4.716' },
+      { label: 'Zeidan et al. (2010) - Mindfulness Meditation Improves Cognition', url: 'https://doi.org/10.1016/j.cognition.2010.03.006' },
+      { label: 'Clance & Imes (1978) - The Imposter Phenomenon in High Achieving Women' },
     ],
   },
   {
@@ -232,7 +232,7 @@ const GUIDE_SECTIONS = [
     tips: [
       {
         title: '12–8 weeks out: Build the foundation',
-        summary: 'Create a syllabus checklist. Attend all lectures/tutorials. Make summary notes topic-by-topic. Do not cram — aim to understand, not memorise.',
+        summary: 'Create a syllabus checklist. Attend all lectures/tutorials. Make summary notes topic-by-topic. Do not cram - aim to understand, not memorise.',
         research: (
           <>
             <p><strong>What research suggests:</strong> Distributed practice (spacing your studying over weeks) is one of the most robust findings in learning science (Cepeda et al., 2006). Starting 12 weeks before exams gives your brain time to consolidate material across multiple sleep cycles.</p>
@@ -246,7 +246,7 @@ const GUIDE_SECTIONS = [
         research: (
           <>
             <p><strong>What research found:</strong> Putnam et al. (2016) reviewed practice testing and found it consistently outperforms re-reading, summarising, and concept mapping. A student who does 3+ past papers under timed conditions improves by an average of 0.5–1 grade boundaries.</p>
-            <p><strong>Practical plan:</strong> Do one past paper per week, untimed at first. Review mistakes immediately. Build a "mistake log" — a single document listing types of errors you make.</p>
+            <p><strong>Practical plan:</strong> Do one past paper per week, untimed at first. Review mistakes immediately. Build a "mistake log" - a single document listing types of errors you make.</p>
           </>
         ),
       },
@@ -255,7 +255,7 @@ const GUIDE_SECTIONS = [
         summary: 'Focus on your weakest topics. Use active recall and spaced repetition. Do timed past papers under exam conditions.',
         research: (
           <>
-            <p><strong>What research suggests:</strong> This is the time for "desirable difficulties" (Bjork &amp; Bjork, 2011). Making practice slightly harder — by imposing time pressure, mixing topics, or reducing cues — enhances long-term retention more than easy practice.</p>
+            <p><strong>What research suggests:</strong> This is the time for "desirable difficulties" (Bjork &amp; Bjork, 2011). Making practice slightly harder - by imposing time pressure, mixing topics, or reducing cues - enhances long-term retention more than easy practice.</p>
             <p><strong>Practical plan:</strong> Identify 3–5 weakest topics from your past paper performance. Dedicate 60% of your time to these. Use the Pomodoro method. Do one full timed paper every 3–4 days.</p>
           </>
         ),
@@ -275,17 +275,17 @@ const GUIDE_SECTIONS = [
         summary: 'Have a calm morning routine. Arrive early. Read all questions before starting. Tackle easier questions first. Watch your timing.',
         research: (
           <>
-            <p><strong>What research suggests:</strong> Performance anxiety is normal. The "arousal reappraisal" technique — telling yourself "I am excited, not anxious" — has been shown to improve exam performance (Brooks, 2014). Deep breathing before starting reduces cortisol and improves access to working memory.</p>
+            <p><strong>What research suggests:</strong> Performance anxiety is normal. The "arousal reappraisal" technique - telling yourself "I am excited, not anxious" - has been shown to improve exam performance (Brooks, 2014). Deep breathing before starting reduces cortisol and improves access to working memory.</p>
             <p><strong>Practical plan:</strong> 3 deep breaths before opening the paper. Skim all questions. Start with a question you are confident about to build momentum. Allocate time per question and stick to it.</p>
           </>
         ),
       },
     ],
     sources: [
-      { label: 'Cepeda et al. (2006) — Spaced Repetition and Memory', url: 'https://doi.org/10.1037/0033-2909.132.3.354' },
-      { label: 'Putnam et al. (2016) — Does Practice Testing Boost Learning?', url: 'https://doi.org/10.1177/1529100616680033' },
-      { label: 'Bjork & Bjork (2011) — Desirable Difficulties in Learning' },
-      { label: 'Brooks (2014) — Arousal Reappraisal and Performance', url: 'https://doi.org/10.1037/a0037410' },
+      { label: 'Cepeda et al. (2006) - Spaced Repetition and Memory', url: 'https://doi.org/10.1037/0033-2909.132.3.354' },
+      { label: 'Putnam et al. (2016) - Does Practice Testing Boost Learning?', url: 'https://doi.org/10.1177/1529100616680033' },
+      { label: 'Bjork & Bjork (2011) - Desirable Difficulties in Learning' },
+      { label: 'Brooks (2014) - Arousal Reappraisal and Performance', url: 'https://doi.org/10.1037/a0037410' },
     ],
   },
 ];

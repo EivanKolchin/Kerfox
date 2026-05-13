@@ -2268,13 +2268,13 @@ input { font-family: inherit; }
 }
 
 /* ================================================================
-   FOCUS THEME — Lasers & Quanta redesign
+  FOCUS THEME - Lasers & Quanta redesign
    ================================================================ */
 
 .focus-shell {
   min-height: 100vh;
-  background: #0b1120;
-  color: #f0f3f8;
+  background: var(--bg);
+  color: var(--text);
 }
 
 .focus-topbar {
@@ -2282,8 +2282,8 @@ input { font-family: inherit; }
   align-items: center;
   justify-content: space-between;
   padding: 0.75rem 1.25rem;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-  background: rgba(11,17,32,0.96);
+  border-bottom: 1px solid var(--border);
+  background: rgba(255,255,255,0.96);
   backdrop-filter: blur(12px);
   position: sticky;
   top: 0;
@@ -2299,19 +2299,19 @@ input { font-family: inherit; }
 .focus-topbar-brand-name {
   font-weight: 700;
   font-size: 0.9rem;
-  color: #f1f5f9;
+  color: var(--text);
 }
 
 .focus-topbar-brand-sub {
   font-size: 0.7rem;
-  color: #8892a4;
+  color: var(--text-muted);
 }
 
 .focus-topbar-back {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
   border-radius: 8px;
-  color: #8892a4;
+  color: var(--text-muted);
   padding: 0.4rem 0.85rem;
   font-size: 0.78rem;
   font-weight: 500;
@@ -2320,9 +2320,9 @@ input { font-family: inherit; }
 }
 
 .focus-topbar-back:hover {
-  color: #f1f5f9;
-  border-color: rgba(255,255,255,0.15);
-  background: rgba(255,255,255,0.08);
+  color: var(--text);
+  border-color: var(--gold-300);
+  background: var(--cream-100);
 }
 
 .focus-body {
@@ -2341,7 +2341,7 @@ input { font-family: inherit; }
   font-size: 0.6rem;
   font-weight: 700;
   letter-spacing: 0.1em;
-  text-transform: uppercase;
+  color: var(--text);
   color: #f59e0b;
   padding: 0.25rem 0.65rem;
   background: rgba(245,158,11,0.1);
@@ -2352,7 +2352,7 @@ input { font-family: inherit; }
 .focus-header h1 {
   font-family: 'Space Grotesk', 'Inter', sans-serif;
   font-size: 2.2rem;
-  font-weight: 700;
+  color: var(--text-muted);
   color: #f1f5f9;
   line-height: 1.1;
 }
@@ -2384,9 +2384,9 @@ input { font-family: inherit; }
   flex-shrink: 0;
   padding: 0.3rem 0.7rem;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.06);
-  background: transparent;
-  color: #8892a4;
+  border: 1px solid var(--border-card);
+  background: var(--bg-card);
+  color: var(--text-muted);
   font-size: 0.7rem;
   font-weight: 600;
   transition: all 0.15s;
@@ -2396,8 +2396,9 @@ input { font-family: inherit; }
 }
 
 .focus-tab:hover {
-  border-color: rgba(255,255,255,0.12);
-  color: #e2e8f0;
+  border-color: var(--gold-300);
+  color: var(--text);
+  background: var(--cream-100);
 }
 
 .focus-tab.active {
@@ -2418,7 +2419,7 @@ input { font-family: inherit; }
   gap: 0.65rem;
   margin-bottom: 0.85rem;
   padding-bottom: 0.65rem;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid var(--border);
 }
 
 .focus-section-num {
@@ -2434,13 +2435,13 @@ input { font-family: inherit; }
   font-family: 'Space Grotesk', 'Inter', sans-serif;
   font-size: 1.1rem;
   font-weight: 700;
-  color: #f1f5f9;
+  color: var(--text);
 }
 
 /* Question card */
 .focus-q {
-  background: #131c31;
-  border: 1px solid rgba(255,255,255,0.06);
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
   border-radius: 12px;
   margin-bottom: 0.7rem;
   overflow: hidden;
@@ -2448,11 +2449,11 @@ input { font-family: inherit; }
 }
 
 .focus-q:hover {
-  border-color: rgba(255,255,255,0.1);
+  border-color: var(--gold-300);
 }
 
 .focus-q.open {
-  border-color: rgba(245,158,11,0.2);
+  border-color: var(--gold-400);
 }
 
 .focus-q.advanced {
@@ -2475,7 +2476,7 @@ input { font-family: inherit; }
   width: 26px;
   height: 26px;
   min-width: 26px;
-  background: rgba(255,255,255,0.05);
+  background: var(--cream-100);
   color: #f59e0b;
   border-radius: 6px;
   font-family: 'JetBrains Mono', monospace;
@@ -2488,7 +2489,7 @@ input { font-family: inherit; }
   flex: 1;
   font-size: 0.92rem;
   line-height: 1.65;
-  color: #f0f3f8;
+  color: var(--text);
   min-width: 0;
 }
 
@@ -2499,9 +2500,9 @@ input { font-family: inherit; }
 .focus-q-text .katex-display,
 .focus-q-answer-body .katex-display { margin: 0.5rem 0; overflow-x: auto; }
 .focus-q-text .katex .base,
-.focus-q-answer-body .katex .base { color: #f0f3f8; }
+.focus-q-answer-body .katex .base { color: var(--text); }
 .focus-q-text .katex .katex-html,
-.focus-q-answer-body .katex .katex-html { color: #f0f3f8; }
+.focus-q-answer-body .katex .katex-html { color: var(--text); }
 .focus-q-text .katex .mord,
 .focus-q-answer-body .katex .mord,
 .focus-q-text .katex .mbin,
@@ -2603,6 +2604,26 @@ input { font-family: inherit; }
   margin-bottom: 0.5rem;
   padding-bottom: 0.3rem;
   border-bottom: 1px solid rgba(245,158,11,0.2);
+}
+
+.focus-model-answer-box {
+  margin-bottom: 1rem;
+}
+
+.focus-deep-dive {
+  margin-top: 0.5rem;
+}
+
+.focus-deep-dive .deep-dive-label {
+  display: block;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #3b82f6;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid rgba(59,130,246,0.15);
 }
 
 .focus-q-answer-body .model-answer {
