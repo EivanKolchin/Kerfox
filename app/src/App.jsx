@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+﻿import { useEffect, useState } from 'react';
 import { useStore } from './store.js';
 import { topics } from './data/questions.js';
 import Sidebar from './components/Sidebar.jsx';
@@ -101,80 +101,68 @@ const COURSE_OPTIONS = {
     { id: 'alevel-epq', label: 'Extended Project Qualification (EPQ)', description: 'Independent research and project delivery.', icon: '▤', boards: ['AQA', 'Pearson Edexcel', 'OCR', 'WJEC Eduqas'] },
   ],
   uni: [
-    { id: 'physics-first-year', label: 'Physics - First Year', provider: 'University of Southampton', description: 'Continue straight into the live PHYS1204 question bank.', icon: '🔬', implemented: true, module: 'lasers' },
-    { id: 'soton-biomedical-engineering', label: 'Biomedical Engineering - First Year', provider: 'University of Southampton', description: 'Mechanics, materials and medical device foundations.', icon: '⚕️' },
-    { id: 'soton-medical-engineering', label: 'Medical Engineering - First Year', provider: 'University of Southampton', description: 'Clinical technology, sensing and systems design.', icon: '🏥' },
-    { id: 'soton-electronic-engineering', label: 'Electronic Engineering - First Year', provider: 'University of Southampton', description: 'Circuits, signals and embedded systems.', icon: '⌁' },
-    { id: 'soton-computer-science', label: 'Computer Science - First Year', provider: 'University of Southampton', description: 'Algorithms, software engineering and computational thinking.', icon: '⌘' },
-    { id: 'soton-software-engineering', label: 'Software Engineering - First Year', provider: 'University of Southampton', description: 'Large systems, architecture and team development.', icon: '🖧' },
-    { id: 'soton-artificial-intelligence', label: 'Artificial Intelligence - First Year', provider: 'University of Southampton', description: 'Machine learning, data and intelligent systems.', icon: '◴' },
-    { id: 'soton-chemistry', label: 'Chemistry - First Year', provider: 'University of Southampton', description: 'Molecular structure, reaction pathways and lab practice.', icon: '⚗️' },
-    { id: 'soton-mathematics', label: 'Mathematics - First Year', provider: 'University of Southampton', description: 'Analysis, algebra, modelling and methods.', icon: '∫' },
-    { id: 'soton-philosophy', label: 'Philosophy - First Year', provider: 'University of Southampton', description: 'Logic, ethics and modern philosophical problems.', icon: 'Φ' },
-    { id: 'soton-law', label: 'Law - First Year', provider: 'University of Southampton', description: 'Public law, tort, contract and legal reasoning.', icon: '⚖' },
-    { id: 'soton-economics', label: 'Economics - First Year', provider: 'University of Southampton', description: 'Microeconomics, macroeconomics and quantitative tools.', icon: '📈' },
-    { id: 'soton-medicine', label: 'Medicine - First Year', provider: 'University of Southampton', description: 'Human biology, systems and clinical foundations.', icon: '⚕' },
-    { id: 'soton-psychology', label: 'Psychology - First Year', provider: 'University of Southampton', description: 'Cognition, behaviour and research methods.', icon: '◌' },
-    { id: 'soton-politics-ir', label: 'Politics and International Relations - First Year', provider: 'University of Southampton', description: 'Political theory, institutions and global affairs.', icon: '⌬' },
-
-    { id: 'imperial-aeronautical', label: 'Aeronautical Engineering - First Year', provider: 'Imperial College London', description: 'Flight mechanics, structures and aerodynamics.', icon: '✈' },
-    { id: 'imperial-spacecraft', label: 'Aeronautics with Spacecraft Engineering - First Year', provider: 'Imperial College London', description: 'Orbital systems, propulsion and spacecraft design.', icon: '🛰' },
-    { id: 'imperial-chemical', label: 'Chemical Engineering - First Year', provider: 'Imperial College London', description: 'Transport processes, reaction engineering and design.', icon: '⚗️' },
-    { id: 'imperial-civil', label: 'Civil Engineering - First Year', provider: 'Imperial College London', description: 'Infrastructure, structures and urban systems.', icon: '🏗' },
-    { id: 'imperial-computing', label: 'Computing - First Year', provider: 'Imperial College London', description: 'Programming, architecture and computational models.', icon: '⌘' },
-    { id: 'imperial-eee', label: 'Electronic and Electrical Engineering - First Year', provider: 'Imperial College London', description: 'Signals, systems, electronics and power.', icon: '⌁' },
-    { id: 'imperial-materials', label: 'Materials Science and Engineering - First Year', provider: 'Imperial College London', description: 'Structure, properties and materials innovation.', icon: '▦' },
-    { id: 'imperial-mechanical', label: 'Mechanical Engineering - First Year', provider: 'Imperial College London', description: 'Dynamics, control, manufacturing and design.', icon: '⛭' },
-    { id: 'imperial-math', label: 'Mathematics - First Year', provider: 'Imperial College London', description: 'Pure maths, applied maths and modelling.', icon: '∫' },
-    { id: 'imperial-physics', label: 'Physics - First Year', provider: 'Imperial College London', description: 'Core physical theory and experimental methods.', icon: '⚛️' },
-    { id: 'imperial-biochemistry', label: 'Biochemistry - First Year', provider: 'Imperial College London', description: 'Molecular life sciences with quantitative rigour.', icon: '🧬' },
-    { id: 'imperial-biological-sciences', label: 'Biological Sciences - First Year', provider: 'Imperial College London', description: 'From cell systems to organismal biology.', icon: '🧫' },
-    { id: 'imperial-medicine', label: 'Medicine - First Year', provider: 'Imperial College London', description: 'Biomedical science, patients and evidence-based care.', icon: '⚕' },
-    { id: 'imperial-economics-finance-data', label: 'Economics, Finance and Data Science - First Year', provider: 'Imperial College London', description: 'Interdisciplinary quantitative decision making.', icon: '📊' },
-
-    { id: 'ucl-biomedical-engineering', label: 'Biomedical Engineering - First Year', provider: 'UCL', description: 'Engineering principles applied to healthcare technologies.', icon: '⚕️' },
-    { id: 'ucl-biochemical-engineering', label: 'Biochemical Engineering - First Year', provider: 'UCL', description: 'Bioprocessing, bioreactors and translational engineering.', icon: '🧪' },
-    { id: 'ucl-computer-science', label: 'Computer Science - First Year', provider: 'UCL', description: 'Core computing systems and software design.', icon: '⌘' },
-    { id: 'ucl-robotics-ai', label: 'Robotics and Artificial Intelligence - First Year', provider: 'UCL', description: 'Autonomy, control and intelligent machines.', icon: '◴' },
-    { id: 'ucl-data-science', label: 'Data Science - First Year', provider: 'UCL', description: 'Statistical computing and data-centric methods.', icon: '▤' },
-    { id: 'ucl-electronic-electrical', label: 'Electronic and Electrical Engineering - First Year', provider: 'UCL', description: 'Hardware, networks, communication and systems.', icon: '⌁' },
-    { id: 'ucl-chemical', label: 'Chemical Engineering - First Year', provider: 'UCL', description: 'Process systems, chemistry and industrial design.', icon: '⚗️' },
-    { id: 'ucl-civil', label: 'Civil Engineering - First Year', provider: 'UCL', description: 'Built environment engineering and sustainability.', icon: '🏗' },
-    { id: 'ucl-mechanical', label: 'Mechanical Engineering - First Year', provider: 'UCL', description: 'Mechanics, thermodynamics and product systems.', icon: '⛭' },
-    { id: 'ucl-mathematics', label: 'Mathematics - First Year', provider: 'UCL', description: 'Pure and applied mathematics foundations.', icon: '∫' },
-    { id: 'ucl-physics', label: 'Physics - First Year', provider: 'UCL', description: 'Contemporary physics and experimental practice.', icon: '⚛️' },
-    { id: 'ucl-theoretical-physics', label: 'Theoretical Physics - First Year', provider: 'UCL', description: 'Mathematical frameworks for modern physics.', icon: '∴' },
-    { id: 'ucl-economics', label: 'Economics - First Year', provider: 'UCL', description: 'Theory, policy and quantitative economics.', icon: '📈' },
-    { id: 'ucl-law', label: 'Law - First Year', provider: 'UCL', description: 'Jurisprudence, legal method and doctrine.', icon: '⚖' },
-    { id: 'ucl-philosophy', label: 'Philosophy - First Year', provider: 'UCL', description: 'Core analytic philosophy and argument structure.', icon: 'Φ' },
-    { id: 'ucl-ppe', label: 'Philosophy, Politics and Economics - First Year', provider: 'UCL', description: 'Interdisciplinary social analysis and public reasoning.', icon: '⌬' },
-    { id: 'ucl-medicine', label: 'Medicine - First Year', provider: 'UCL', description: 'Biomedical sciences and clinical development.', icon: '⚕' },
-    { id: 'ucl-neuroscience', label: 'Neuroscience - First Year', provider: 'UCL', description: 'Brain systems from molecules to cognition.', icon: '🧠' },
-    { id: 'ucl-architecture', label: 'Architecture - First Year', provider: 'UCL', description: 'Design, urban context and technical skills.', icon: '▥' },
-    { id: 'ucl-urban-studies', label: 'Urban Studies - First Year', provider: 'UCL', description: 'Cities, policy, design and development systems.', icon: '⌂' },
-
-    { id: 'oxford-computer-science', label: 'Computer Science - First Year', provider: 'University of Oxford', description: 'Algorithms, logic and software systems.', icon: '⌘' },
-    { id: 'oxford-cs-philosophy', label: 'Computer Science and Philosophy - First Year', provider: 'University of Oxford', description: 'Computation, logic, epistemology and ethics.', icon: 'Φ' },
-    { id: 'oxford-engineering', label: 'Engineering Science - First Year', provider: 'University of Oxford', description: 'Cross-disciplinary engineering foundations.', icon: '⛭' },
-    { id: 'oxford-mathematics', label: 'Mathematics - First Year', provider: 'University of Oxford', description: 'Proof-focused pure and applied mathematics.', icon: '∫' },
-    { id: 'oxford-maths-cs', label: 'Mathematics and Computer Science - First Year', provider: 'University of Oxford', description: 'Joint depth in formal methods and computation.', icon: '∮' },
-    { id: 'oxford-physics', label: 'Physics - First Year', provider: 'University of Oxford', description: 'Classical and modern physics with practicals.', icon: '⚛️' },
-    { id: 'oxford-physics-philosophy', label: 'Physics and Philosophy - First Year', provider: 'University of Oxford', description: 'Physical theory with philosophical analysis.', icon: '∴' },
-    { id: 'oxford-chemistry', label: 'Chemistry - First Year', provider: 'University of Oxford', description: 'Atomic structure, reactivity and advanced labs.', icon: '⚗️' },
-    { id: 'oxford-biochemistry', label: 'Biochemistry - First Year', provider: 'University of Oxford', description: 'Molecular foundations of biological systems.', icon: '🧬' },
-    { id: 'oxford-biomedical-sciences', label: 'Biomedical Sciences - First Year', provider: 'University of Oxford', description: 'Integrative physiology and translational science.', icon: '🧫' },
-    { id: 'oxford-medicine', label: 'Medicine - First Year', provider: 'University of Oxford', description: 'Pre-clinical medical sciences and systems.', icon: '⚕' },
-    { id: 'oxford-law', label: 'Law - First Year', provider: 'University of Oxford', description: 'Legal analysis, doctrine and argument.', icon: '⚖' },
-    { id: 'oxford-econ-management', label: 'Economics and Management - First Year', provider: 'University of Oxford', description: 'Economic analysis and management science.', icon: '📉' },
-    { id: 'oxford-ppe', label: 'Philosophy, Politics and Economics - First Year', provider: 'University of Oxford', description: 'Flagship interdisciplinary social science degree.', icon: '⌬' },
-    { id: 'oxford-philosophy-theology', label: 'Philosophy and Theology - First Year', provider: 'University of Oxford', description: 'Logic, metaphysics and theological reasoning.', icon: '✧' },
-    { id: 'oxford-psychology-philosophy-linguistics', label: 'Psychology, Philosophy and Linguistics - First Year', provider: 'University of Oxford', description: 'Mind, language and human behaviour.', icon: '◌' },
-    { id: 'oxford-history', label: 'History - First Year', provider: 'University of Oxford', description: 'Primary-source analysis across historical periods.', icon: '⌛' },
-    { id: 'oxford-english', label: 'English Language and Literature - First Year', provider: 'University of Oxford', description: 'Close reading, criticism and historical context.', icon: '📚' },
-    { id: 'oxford-geography', label: 'Geography - First Year', provider: 'University of Oxford', description: 'Physical and human geography methods.', icon: '⛰' },
-    { id: 'oxford-earth-sciences', label: 'Earth Sciences - First Year', provider: 'University of Oxford', description: 'Geology, geochemistry and Earth systems.', icon: '🌍' },
+    { id: 'uni-physics', label: 'Physics', description: 'Core physical theory, mechanics, and quanta. Features live PHYS1204 module.', icon: '⚛️', implemented: true, module: 'lasers' },
+    { id: 'uni-maths', label: 'Mathematics', description: 'Analysis, algebra, modelling and methods.', icon: '∫' },
+    { id: 'uni-compsci', label: 'Computer Science', description: 'Algorithms, software engineering and computation.', icon: '⌘' },
+    { id: 'uni-engineering', label: 'Engineering', description: 'Mechanical, civil, aeronautical and electrical foundations.', icon: '⛭' },
+    { id: 'uni-medicine', label: 'Medicine', description: 'Human biology, systems and clinical foundations.', icon: '⚕' },
+    { id: 'uni-biology', label: 'Biological Sciences', description: 'Molecular life sciences, genetics and organisms.', icon: '🧫' },
+    { id: 'uni-chemistry', label: 'Chemistry', description: 'Molecular structure, reaction pathways and lab practice.', icon: '⚗️' },
+    { id: 'uni-economics', label: 'Economics', description: 'Microeconomics, macroeconomics and quantitative tools.', icon: '📈' },
+    { id: 'uni-law', label: 'Law', description: 'Public law, tort, contract and legal reasoning.', icon: '⚖' },
+    { id: 'uni-philosophy', label: 'Philosophy', description: 'Logic, ethics and modern philosophical problems.', icon: 'Φ' },
+    { id: 'uni-psychology', label: 'Psychology', description: 'Cognition, behaviour and research methods.', icon: '◌' },
+    { id: 'uni-history', label: 'History', description: 'Primary-source analysis across historical periods.', icon: '⌛' },
+    { id: 'uni-literature', label: 'Literature', description: 'Close reading, criticism and historical context.', icon: '📚' },
+    { id: 'uni-politics', label: 'Politics & International Relations', description: 'Political theory, institutions and global affairs.', icon: '⌬' },
+    { id: 'uni-geography', label: 'Geography & Earth Sciences', description: 'Physical and human geography methods, Earth systems.', icon: '⛰' },
+    { id: 'uni-accounting', label: 'Accounting & Finance', description: 'Financial reporting, management accounting and corporate finance.', icon: '🧮' },
+    { id: 'uni-sociology', label: 'Sociology & Criminology', description: 'Social behavior, institutions and criminal justice systems.', icon: '🤝' },
+    { id: 'uni-nursing', label: 'Nursing & Midwifery', description: 'Clinical practice, patient care and healthcare sciences.', icon: '🩺' },
+    { id: 'uni-oceanography', label: 'Oceanography & Marine Biology', description: 'Marine ecosystems, ocean dynamics and climate.', icon: '🌊' },
+    { id: 'uni-music', label: 'Music', description: 'Performance, composition and musicology.', icon: '🎵' },
+    { id: 'uni-education', label: 'Education', description: 'Pedagogy, learning theory and educational psychology.', icon: '🎓' },
+    { id: 'uni-languages', label: 'Modern Languages & Linguistics', description: 'Language structure, translation and cultural studies.', icon: '🗣️' },
+    { id: 'uni-archaeology', label: 'Archaeology & Anthropology', description: 'Human origins, ancient societies and material culture.', icon: '🏺' },
+    { id: 'uni-fineart', label: 'Fine Art & Design', description: 'Visual arts, studio practice and art history.', icon: '🎨' },
   ],
 };
+
+function GlobalSearchBar({ levelId, onLevelChange, searchQuery, onSearchQueryChange, inCourse }) {
+  return (
+    <div className="global-search-container">
+      <div className="global-search-bar">
+        {!inCourse && (
+          <select 
+            className="global-search-level"
+            value={levelId || "all"}
+            onChange={e => onLevelChange(e.target.value === "all" ? null : e.target.value)}
+          >
+            <option value="all">Pick your level</option>
+            {LEARNING_LEVELS.map(l => (
+              <option key={l.id} value={l.id}>{l.title}</option>
+            ))}
+          </select>
+        )}
+        <div className="global-search-input-wrapper">
+          <span className="global-search-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </span>
+          <input 
+            type="search"
+            className="global-search-input"
+            placeholder={inCourse ? "Search course modules..." : "Search courses..."}
+            value={searchQuery}
+            onChange={e => onSearchQueryChange(e.target.value)}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function LogoMark() {
   return (
@@ -277,7 +265,7 @@ function CourseCard({ course, levelId, selectedBoard, onBoardChange, onSelect })
   );
 }
 
-function LandingHub({ onSelectLevel, onLogin, onOpenGuides }) {
+function LandingHub({ onSelectLevel, onLogin, onOpenGuides, searchQuery, onSearchQueryChange, selectedBoards, onBoardChange, onSelectCourse }) {
   return (
     <div className="landing-shell">
       <div className="landing-orb landing-orb-one" />
@@ -285,8 +273,32 @@ function LandingHub({ onSelectLevel, onLogin, onOpenGuides }) {
       <div className="landing-grid" />
 
       <LandingTopBar onLogin={onLogin} />
+      <GlobalSearchBar levelId={null} onLevelChange={onSelectLevel} searchQuery={searchQuery} onSearchQueryChange={onSearchQueryChange} />
 
-      <nav className="landing-quick-nav" aria-label="Page pointers">
+      {searchQuery ? (
+        <main className="landing-main">
+          <section className="course-hero">
+            <h1>Search Results</h1>
+            <p>Matching "{searchQuery}" across all levels</p>
+          </section>
+          <section className="course-grid">
+            {LEARNING_LEVELS.flatMap(lvl => (COURSE_OPTIONS[lvl.id] || []).map(c => ({...c, levelId: lvl.id})))
+              .filter(c => c.label.toLowerCase().includes(searchQuery.toLowerCase()) || (c.description && c.description.toLowerCase().includes(searchQuery.toLowerCase())))
+              .map(course => (
+                <CourseCard 
+                  key={`${course.levelId}-${course.id}`} 
+                  course={course} 
+                  levelId={course.levelId} 
+                  selectedBoard={selectedBoards[course.id]}
+                  onBoardChange={onBoardChange}
+                  onSelect={(c) => { onSelectLevel(course.levelId); setTimeout(() => onSelectCourse(c), 0); }}
+                />
+            ))}
+          </section>
+        </main>
+      ) : (
+      <>
+        <nav className="landing-quick-nav" aria-label="Page pointers">
         <button className="quick-nav-btn" onClick={() => onOpenGuides('learning')}>Optimising your learning</button>
         <button className="quick-nav-btn" onClick={() => onOpenGuides('health')}>Taking care of your health</button>
         <button className="quick-nav-btn" onClick={() => onOpenGuides('exam')}>Exam preparation guides</button>
@@ -340,12 +352,17 @@ function LandingHub({ onSelectLevel, onLogin, onOpenGuides }) {
           </article>
         </section>
       </main>
+      </>
+      )}
     </div>
   );
 }
 
-function CourseHub({ level, selectedBoards, onBoardChange, onSelectCourse, onBack, onBackHome }) {
-  const courses = COURSE_OPTIONS[level.id] || [];
+function CourseHub({ level, selectedBoards, onBoardChange, onSelectCourse, onBack, onBackHome, searchQuery, onSearchQueryChange, onSelectLevel }) {
+  const allCourses = COURSE_OPTIONS[level.id] || [];
+  const courses = searchQuery 
+    ? allCourses.filter(c => c.label.toLowerCase().includes(searchQuery.toLowerCase()) || (c.description && c.description.toLowerCase().includes(searchQuery.toLowerCase())))
+    : allCourses;
 
   return (
     <div className="landing-shell course-shell">
@@ -354,6 +371,7 @@ function CourseHub({ level, selectedBoards, onBoardChange, onSelectCourse, onBac
       <div className="landing-grid" />
 
       <LandingTopBar onBack={onBackHome} />
+      <GlobalSearchBar levelId={level.id} onLevelChange={onSelectLevel} searchQuery={searchQuery} onSearchQueryChange={onSearchQueryChange} />
 
       <main className="landing-main">
         <section className="course-hero">
@@ -389,7 +407,7 @@ function CourseHub({ level, selectedBoards, onBoardChange, onSelectCourse, onBac
   );
 }
 
-function CoursePlaceholder({ level, course, selectedBoard, onBack, onBackHome }) {
+function CoursePlaceholder({ level, course, selectedBoard, onBack, onBackHome, searchQuery, onSearchQueryChange }) {
   return (
     <div className="landing-shell course-shell">
       <div className="landing-orb landing-orb-one" />
@@ -397,6 +415,7 @@ function CoursePlaceholder({ level, course, selectedBoard, onBack, onBackHome })
       <div className="landing-grid" />
 
       <LandingTopBar onBack={onBackHome} />
+      <GlobalSearchBar inCourse={true} searchQuery={searchQuery} onSearchQueryChange={onSearchQueryChange} />
 
       <main className="landing-main">
         <section className="placeholder-panel">
@@ -435,6 +454,7 @@ function TopicSection({ topic }) {
 
 export default function App() {
   const [page, setPage] = useState('learn');
+  const [searchQuery, setSearchQuery] = useState('');
   const [selectedLevelId, setSelectedLevelId] = useState(null);
   const [selectedCourseId, setSelectedCourseId] = useState(null);
   const [selectedBoards, setSelectedBoards] = useState({});
@@ -449,7 +469,7 @@ export default function App() {
   const selectedCourse = selectedLevel
     ? (COURSE_OPTIONS[selectedLevel.id] || []).find(course => course.id === selectedCourseId) || null
     : null;
-  const isLivePhysics = selectedLevelId === 'uni' && selectedCourseId === 'physics-first-year';
+  const isLivePhysics = selectedLevelId === 'uni' && selectedCourseId === 'uni-physics';
 
   function resetPhysicsUi() {
     if (formulaOpen) toggleFormula();
@@ -462,6 +482,7 @@ export default function App() {
     setSelectedCourseId(null);
     setSelectedLevelId(null);
     setGuidesSection(null);
+    setSearchQuery('');
     setPage('learn');
   }
 
@@ -524,7 +545,7 @@ export default function App() {
   }
 
   if (!selectedLevel) {
-    return <LandingHub onSelectLevel={selectLevel} onLogin={openLogin} onOpenGuides={openGuides} />;
+    return <LandingHub onSelectLevel={selectLevel} onLogin={openLogin} onOpenGuides={openGuides} searchQuery={searchQuery} onSearchQueryChange={setSearchQuery} selectedBoards={selectedBoards} onBoardChange={selectBoard} onSelectCourse={selectCourse} />;
   }
 
   if (selectedCourse && !isLivePhysics) {
@@ -535,6 +556,8 @@ export default function App() {
         selectedBoard={selectedBoards[selectedCourse.id]}
         onBack={goBackToCourses}
         onBackHome={goHome}
+        searchQuery={searchQuery}
+        onSearchQueryChange={setSearchQuery}
       />
     );
   }
@@ -565,7 +588,7 @@ export default function App() {
                 <button className="page-header-link" onClick={goBackToCourses}>
                   ← Back to university courses
                 </button>
-                <div className="page-header-badge">University of Southampton · Physics Year 1</div>
+                <div className="page-header-badge">University Physics</div>
                 <h1>Lasers &amp; <em>Quanta</em></h1>
                 <p className="page-header-subtitle">Comprehensive Exam Question Bank with Model Answers</p>
                 <div className="page-stats">
@@ -589,6 +612,7 @@ export default function App() {
               </header>
 
               <Toolbar />
+              <GlobalSearchBar inCourse={true} searchQuery={searchQuery} onSearchQueryChange={setSearchQuery} />
 
               <div className="reading-box">
                 <div className="reading-box-title">Core Reading</div>
@@ -602,7 +626,7 @@ export default function App() {
                 </div>
               </div>
 
-              {topics.map(t => <TopicSection key={t.id} topic={t} />)}
+              {topics.filter(t => !searchQuery || t.title.toLowerCase().includes(searchQuery.toLowerCase()) || t.questions.some(q => q.title.toLowerCase().includes(searchQuery.toLowerCase()))).map(t => <TopicSection key={t.id} topic={t} />)}
             </div>
 
             <button
@@ -631,7 +655,12 @@ export default function App() {
         onSelectCourse={selectCourse}
         onBack={goHome}
         onBackHome={goHome}
+        searchQuery={searchQuery}
+        onSearchQueryChange={setSearchQuery}
+        onSelectLevel={selectLevel}
       />
     </div>
   );
 }
+
+

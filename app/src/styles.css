@@ -1,15 +1,15 @@
-/* ================================================================
+﻿/* ================================================================
    PHYSICS EXAM BANK - Design System
    ================================================================ */
 
 @import 'katex/dist/katex.min.css';
 
-/* ── Fonts ─────────────────────────────────────────────────────── */
+/* â”€â”€ Fonts â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 /* Loaded from Google Fonts in index.html */
 
-/* ── Custom Properties ──────────────────────────────────────────── */
+/* â”€â”€ Custom Properties â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 :root {
-  --display-font: 'Space Grotesk', 'Inter', sans-serif;
+  --display-font: 'Outfit', 'Inter', system-ui, sans-serif;
 
   /* Palette */
   --ink-900: #0d1628;
@@ -46,7 +46,7 @@
   --hard-50:  #fef2f2;
 
   /* Semantic */
-  --bg:        var(--cream-200);
+  --bg:        #ffffff;
   --bg-card:   #ffffff;
   --bg-answer: #f4faf4;
   --bg-q:      #f0f3fb;
@@ -67,10 +67,10 @@
 
   /* Radii */
   --r-xs: 3px;
-  --r-sm: 6px;
-  --r-md: 10px;
-  --r-lg: 16px;
-  --r-xl: 24px;
+  --r-sm: 2px;
+  --r-md: 4px;
+  --r-lg: 6px;
+  --r-xl: 8px;
 
   /* Shadows */
   --shadow-sm: 0 1px 3px rgba(13,22,40,0.08), 0 1px 2px rgba(13,22,40,0.06);
@@ -82,15 +82,12 @@
   --ease-spring: cubic-bezier(0.34, 1.3, 0.64, 1);
 }
 
-/* ── Reset ──────────────────────────────────────────────────────── */
+/* â”€â”€ Reset â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; font-size: 16px; }
 body {
   font-family: 'Inter', system-ui, sans-serif;
-  background:
-    radial-gradient(circle at top left, rgba(201,148,12,0.18), transparent 30%),
-    radial-gradient(circle at top right, rgba(46,65,128,0.16), transparent 28%),
-    linear-gradient(180deg, #f7f3ea 0%, #f1eadb 100%);
+  background: radial-gradient(#d8e0f0 1px, transparent 1px); background-size: 20px 20px; background-color: #ffffff;
   color: var(--text);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -106,7 +103,7 @@ input { font-family: inherit; }
   min-height: 100vh;
 }
 
-/* ── Sidebar ────────────────────────────────────────────────────── */
+/* â”€â”€ Sidebar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .sidebar {
   width: var(--sidebar-w);
   min-width: var(--sidebar-w);
@@ -129,7 +126,7 @@ input { font-family: inherit; }
 .sidebar-scroll::-webkit-scrollbar { width: 3px; }
 .sidebar-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 2px; }
 
-/* ── Module Tabs ─────────────────────────────────────────────────── */
+/* â”€â”€ Module Tabs â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .module-tabs {
   padding: 0.75rem 0 0.5rem;
   border-bottom: 1px solid var(--sidebar-border);
@@ -164,7 +161,7 @@ input { font-family: inherit; }
 }
 .module-tab.active .module-tab-dot { opacity: 1; }
 
-/* ── Sidebar Header ──────────────────────────────────────────────── */
+/* â”€â”€ Sidebar Header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .sidebar-header {
   padding: 0.85rem 1.1rem 0.6rem;
   border-bottom: 1px solid var(--sidebar-border);
@@ -184,7 +181,7 @@ input { font-family: inherit; }
   line-height: 1.3;
 }
 
-/* ── Progress Section ────────────────────────────────────────────── */
+/* â”€â”€ Progress Section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .sidebar-section {
   padding: 0.75rem 1.1rem;
   border-bottom: 1px solid var(--sidebar-border);
@@ -250,7 +247,7 @@ input { font-family: inherit; }
 .chip-text { color: rgba(255,255,255,0.55); }
 .chip-val { color: rgba(255,255,255,0.85); font-weight: 600; margin-left: auto; }
 
-/* ── Folder Section ──────────────────────────────────────────────── */
+/* â”€â”€ Folder Section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .folder-item {
   display: flex;
   align-items: center;
@@ -276,7 +273,7 @@ input { font-family: inherit; }
   font-weight: 500;
 }
 
-/* ── Topic Nav ───────────────────────────────────────────────────── */
+/* â”€â”€ Topic Nav â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .topic-nav-link {
   display: block;
   padding: 0.38rem 1.1rem;
@@ -310,7 +307,7 @@ input { font-family: inherit; }
   padding: 2rem 2rem 6rem;
 }
 
-/* ── Landing Shell ─────────────────────────────────────────────── */
+/* â”€â”€ Landing Shell â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .app-shell {
   min-height: 100vh;
   position: relative;
@@ -723,6 +720,7 @@ input { font-family: inherit; }
 
 .level-card,
 .course-card {
+  transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.2s ease-out;
   text-align: left;
   border: 1px solid rgba(18,29,53,0.08);
   border-radius: 26px;
@@ -841,6 +839,7 @@ input { font-family: inherit; }
 }
 
 .course-card {
+  transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.2s ease-out;
   padding: 1rem 1rem 1rem 1.05rem;
   display: flex;
   align-items: center;
@@ -1039,6 +1038,7 @@ input { font-family: inherit; }
 
   .level-card,
   .course-card {
+  transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.2s ease-out;
     min-height: 0;
   }
 }
@@ -1064,6 +1064,7 @@ input { font-family: inherit; }
   }
 
   .course-card {
+  transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.2s ease-out;
     align-items: flex-start;
   }
 
@@ -1072,7 +1073,7 @@ input { font-family: inherit; }
   }
 }
 
-/* ── Page Header ─────────────────────────────────────────────────── */
+/* â”€â”€ Page Header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .page-header {
   text-align: center;
   padding: 2rem 0 2.5rem;
@@ -1126,7 +1127,7 @@ input { font-family: inherit; }
   color: var(--text-muted);
 }
 
-/* ── Reading Box ─────────────────────────────────────────────────── */
+/* â”€â”€ Reading Box â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .reading-box {
   background: var(--ink-800);
   border-left: 3px solid var(--gold-400);
@@ -1594,7 +1595,7 @@ input { font-family: inherit; }
 
 .exam-box {
   background: white;
-  border-radius: var(--r-lg);
+  border-radius: 4px;
   width: 100%;
   max-width: 800px;
   box-shadow: var(--shadow-lg);
@@ -1717,10 +1718,10 @@ input { font-family: inherit; }
 }
 .exam-timer-expired { font-size: 0.78rem; color: var(--hard-600); font-style: italic; font-weight: 500; }
 
-/* ── Results ─────────────────────────────────────────────────────── */
+/* â”€â”€ Results â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .results-box {
   background: white;
-  border-radius: var(--r-lg);
+  border-radius: 4px;
   width: 100%;
   max-width: 680px;
   box-shadow: var(--shadow-lg);
@@ -2182,4 +2183,90 @@ input { font-family: inherit; }
   .module-tabs { flex-direction: row; border-bottom: none; border-right: 1px solid var(--sidebar-border); }
   .main-inner { padding: 1.25rem 1rem 4rem; }
   .formula-panel { width: 100%; }
+}
+
+/* ================================================================
+   GLOBAL SEARCH BAR
+   ================================================================ */
+.global-search-container {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 1.5rem;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.global-search-bar {
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: var(--r-xl);
+  box-shadow: 0 4px 20px rgba(13,22,40,0.06), 0 1px 3px rgba(13,22,40,0.04);
+  border: 1px solid var(--border-card);
+  overflow: hidden;
+  width: 100%;
+  transition: box-shadow 0.2s;
+  height: 52px;
+}
+
+.global-search-bar:focus-within {
+  box-shadow: 0 4px 24px rgba(46,65,128,0.12), 0 0 0 3px rgba(46,65,128,0.1);
+  border-color: var(--ink-500);
+}
+
+.global-search-level {
+  appearance: none;
+  background: var(--ink-50);
+  border: none;
+  padding: 0 1.5rem;
+  height: 100%;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text);
+  border-right: 1px solid var(--border-card);
+  outline: none;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.global-search-level:hover {
+  background: var(--ink-100);
+}
+
+.global-search-input-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  height: 100%;
+}
+
+.global-search-icon {
+  margin-right: 0.75rem;
+  opacity: 0.5;
+  font-size: 1.1rem;
+}
+
+.global-search-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--text);
+  height: 100%;
+}
+
+.global-search-input::placeholder {
+  color: var(--text-muted);
+}
+
+
+/* Modern Hover Effects */
+.course-card:hover, .question-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(13,22,40,0.08), 0 4px 8px rgba(13,22,40,0.04);
 }
